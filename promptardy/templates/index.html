@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Promptardy! | Jeopardy-Style Trivia Board{% endblock %}
+
+{% block content %}
+<div class="page-shell">
+    <header class="hero">
+        <div>
+            <p class="eyebrow">Jeopardy-style trivia game</p>
+            <h1>Promptardy!</h1>
+            <p class="tagline">
+                A fast, presentable trivia board you can deploy to Render and click through live.
+            </p>
+        </div>
+
+        <div class="control-panel">
+            <div class="stat-pill">{{ stats.total_categories }} categories loaded</div>
+            <div class="stat-pill">{{ stats.total_clues }} clues ready</div>
+
+            <label for="categoryCount">Board width</label>
+            <select id="categoryCount" aria-label="Board width">
+                {% for option in [4, 5, 6, 7, 8, 9, 10] %}
+                <option value="{{ option }}" {% if option == category_count %}selected{% endif %}>{{ option }} categories</option>
+                {% endfor %}
+            </select>
+
+            <div class="button-row">
+                <button id="newBoardBtn" class="action-btn">New Board</button>
+                <button id="resetUsedBtn" class="action-btn action-btn-secondary">Reset Used Clues</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="board-wrapper">
+        <div class="board-note">
+            Click a clue to reveal it. Click “Show Answer” to flip. Close it and the clue is marked used.
+        </div>
+        <div id="board" class="board" aria-live="polite"></div>
+    </section>
+</div>
+
+<div id="clueModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalCategory">
+    <div class="modal-card">
+        <button id="closeModalBtn" class="modal-close" aria-label="Close clue">×</button>
+        <p id="modalCategory" class="modal-category"></p>
+        <p id="modalValue" class="modal-value"></p>
+        <div class="modal-body">
+            <p id="modalPrompt" class="modal-prompt"></p>
+            <p id="modalAnswer" class="modal-answer hidden"></p>
+        </div>
+        <div class="modal-actions">
+            <button id="showAnswerBtn" class="action-btn">Show Answer</button>
+            <button id="markUsedBtn" class="action-btn action-btn-secondary">Close Clue</button>
+        </div>
+    </div>
+</div>
+
+<script id="initialBoardData" type="application/json">{{ initial_board|tojson }}</script>
+{% endblock %}
