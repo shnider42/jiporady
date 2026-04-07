@@ -1,5 +1,6 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 import os
+import random
 
 app = Flask(__name__)
 app.config["JSON_SORT_KEYS"] = False
@@ -148,9 +149,54 @@ GAME_DATA = {
 }
 
 
+def all_categories():
+    categories = []
+    for round_data in GAME_DATA["rounds"].values():
+        for category in round_data["categories"]:
+            categories.append(
+                {
+                    "category": category["title"],
+                    "clues": category["clues"],
+                }
+            )
+    return categories
+
+
+def build_board(category_count=6):
+    categories = all_categories()
+    category_count = max(4, min(category_count, len(categories)))
+    board = random.sample(categories, category_count)
+    return board
+
+
+def build_stats():
+    categories = all_categories()
+    total_categories = len(categories)
+    total_clues = sum(len(category["clues"]) for category in categories)
+    return {
+        "total_categories": total_categories,
+        "total_clues": total_clues,
+    }
+
+
 @app.route("/")
 def index():
-    return render_template("index.html", title=GAME_DATA["title"], subtitle=GAME_DATA["subtitle"])
+    category_count = request.args.get("categories", default=6, type=int) or 6
+    initial_board = build_board(category_count)
+    return render_template(
+        "index.html",
+        title=GAME_DATA["title"],
+        subtitle=GAME_DATA["subtitle"],
+        stats=build_stats(),
+        category_count=category_count,
+        initial_board=initial_board,
+    )
+
+
+@app.route("/api/board")
+def api_board():
+    category_count = request.args.get("categories", default=6, type=int) or 6
+    return jsonify({"board": build_board(category_count)})
 
 
 @app.route("/api/game")
