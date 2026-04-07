@@ -1,50 +1,37 @@
-# Promptardy!
+# Jiporady Render Edition
 
-A Jeopardy-style trivia board built with Flask for easy local testing and quick deployment to Render.
+A beefed-up Flask version of the Jeopardy-style game, ready to deploy on Render.
 
-## What's included
-- Randomized board generator
-- 30 categories
-- 150 total clues
-- Clickable clue tiles
-- Modal-based question and answer reveal
-- "New Board" button for fresh category sets
-- "Reset Used Clues" button for repeat demos
+## Features
+- Round 1 and Double Jiporady boards
+- Running score with negative score support
+- Browser-persisted progress via localStorage
+- Pop culture, movies/TV, games, sports, history, science, tech, and wordplay categories
+- Final Jiporady section
+- `/health` endpoint for simple health checks
 
-## Run locally
+## Local run
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+source .venv/bin/activate   # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 python app.py
 ```
-Then open `http://127.0.0.1:5000`
 
-## Deploy to Render
-### Option 1: Quick manual setup
-1. Push this folder to GitHub.
-2. In Render, create a new **Web Service**.
-3. Point it at your repo.
-4. Use:
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
+Then open `http://127.0.0.1:5000`.
 
-### Option 2: Blueprint
-If you use the included `render.yaml`, Render can auto-detect the service settings.
+## Deploy on Render
+1. Push these files to the repo root.
+2. Create a new Web Service in Render from the GitHub repo.
+3. Render should detect `render.yaml`, or you can use:
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `gunicorn app:app`
+4. Deploy.
 
-## Edit the question bank
-All categories and clues live in `question_bank.py`.
-
-Each category follows this shape:
-```python
-{
-    "category": "Science Basics",
-    "clues": [
-        {"value": 200, "question": "...", "answer": "What is ...?"},
-        ...
-    ],
-}
-```
-
-## Presentation tip
-For a live demo, set the board to 6 categories for a classic look, and click **New Board** between rounds to show that the site can keep generating fresh boards from the larger clue bank.
+## Files
+- `app.py` - Flask app and question bank
+- `templates/index.html` - main UI
+- `static/style.css` - styling
+- `static/app.js` - gameplay logic and scorekeeping
+- `render.yaml` - Render blueprint
+- `Procfile` - fallback process declaration
