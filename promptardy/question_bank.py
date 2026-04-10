@@ -1,451 +1,315 @@
-def qa(question, answer):
-    return {"question": question, "answer": answer}
+from copy import deepcopy
 
-
-APP_TITLE = "Jiporady"
-APP_SUBTITLE = "A bigger, louder, random-per-session Jeopardy-style party board"
-CATEGORY_COUNT = 6
-
-ROUND_DEFS = {
-    "round_1": {
-        "name": "Round 1",
-        "values": [100, 200, 300, 400, 500],
-        "bank": {
-            "Science & Space": {
-                100: [
-                    qa("This ringed planet is the second largest in our solar system.", "What is Saturn?"),
-                    qa("This planet is known as the Red Planet.", "What is Mars?"),
-                ],
-                200: [
-                    qa("This force keeps planets in orbit and keeps your feet on the ground.", "What is gravity?"),
-                    qa("Plants use sunlight to perform this process.", "What is photosynthesis?"),
-                ],
-                300: [
-                    qa("Most of a cell's DNA is found here.", "What is the nucleus?"),
-                    qa("This is the nearest star to Earth.", "What is the Sun?"),
-                ],
-                400: [
-                    qa("This instrument is used to look at stars and distant galaxies.", "What is a telescope?"),
-                    qa("Water freezes at this temperature on the Celsius scale.", "What is 0 degrees Celsius?"),
-                ],
-                500: [
-                    qa("Named for an Italian physicist, this paradox asks why we have not clearly detected alien civilizations.", "What is the Fermi paradox?"),
-                    qa("This layer of Earth's atmosphere contains the ozone layer.", "What is the stratosphere?"),
-                ],
-            },
-            "Movies & TV": {
-                100: [
-                    qa("This blue alien experiment is the title character in a Disney film with Lilo.", "Who is Stitch?"),
-                    qa("This sitcom is set in the Scranton branch of Dunder Mifflin.", "What is The Office?"),
-                ],
-                200: [
-                    qa("In Breaking Bad, Walter White teaches this subject before becoming a drug kingpin.", "What is chemistry?"),
-                    qa("This 1999 film stars Neo, Morpheus, and Trinity.", "What is The Matrix?"),
-                ],
-                300: [
-                    qa("The Stark family appears in this HBO fantasy series.", "What is Game of Thrones?"),
-                    qa("This movie features a theme park filled with cloned dinosaurs.", "What is Jurassic Park?"),
-                ],
-                400: [
-                    qa("Bong Joon-ho directed this Best Picture winner about two very different families.", "What is Parasite?"),
-                    qa("This sitcom follows six friends living in New York City.", "What is Friends?"),
-                ],
-                500: [
-                    qa("This filmmaker directed Jaws, E.T., and Jurassic Park.", "Who is Steven Spielberg?"),
-                    qa("In Star Wars, this smuggler pilots the Millennium Falcon.", "Who is Han Solo?"),
-                ],
-            },
-            "Music & Pop Culture": {
-                100: [
-                    qa("Taylor Swift first broke out mainly in this genre before becoming a pop superstar.", "What is country?"),
-                    qa("This singer is known as the King of Pop.", "Who is Michael Jackson?"),
-                ],
-                200: [
-                    qa("This artist released the album Renaissance.", "Who is Beyoncé?"),
-                    qa("This K-pop group includes RM, Jin, Suga, j-hope, Jimin, V, and Jung Kook.", "Who are BTS?"),
-                ],
-                300: [
-                    qa("The Beatles came from this English city.", "What is Liverpool?"),
-                    qa("This rapper was born Aubrey Graham.", "Who is Drake?"),
-                ],
-                400: [
-                    qa("This singer's 2024 album was The Tortured Poets Department.", "Who is Taylor Swift?"),
-                    qa("This singer is nicknamed The Boss.", "Who is Bruce Springsteen?"),
-                ],
-                500: [
-                    qa("This music term means gradually getting louder.", "What is crescendo?"),
-                    qa("This Detroit-based label is associated with artists like Stevie Wonder and The Supremes.", "What is Motown?"),
-                ],
-            },
-            "Internet & Tech": {
-                100: [
-                    qa("The 'www' in a web address stands for this.", "What is World Wide Web?"),
-                    qa("This company created the iPhone.", "What is Apple?"),
-                ],
-                200: [
-                    qa("Linus Torvalds created this open-source operating system kernel.", "What is Linux?"),
-                    qa("This version-control platform is now owned by Microsoft.", "What is GitHub?"),
-                ],
-                300: [
-                    qa("HTTP stands for this.", "What is Hypertext Transfer Protocol?"),
-                    qa("RAM stands for this.", "What is Random Access Memory?"),
-                ],
-                400: [
-                    qa("This language is primarily used to style web pages.", "What is CSS?"),
-                    qa("An API stands for this.", "What is an Application Programming Interface?"),
-                ],
-                500: [
-                    qa("DNS translates domain names into these.", "What are IP addresses?"),
-                    qa("In Git, this command copies a remote repository to your local machine.", "What is git clone?"),
-                ],
-            },
-            "Wordplay": {
-                100: [
-                    qa("A word with the opposite meaning of another word.", "What is an antonym?"),
-                    qa("A word that sounds like another but has a different meaning, like sea and see.", "What is a homophone?"),
-                ],
-                200: [
-                    qa("A comparison using 'like' or 'as.'", "What is a simile?"),
-                    qa("A figure of speech in which a thing is described as being something else.", "What is a metaphor?"),
-                ],
-                300: [
-                    qa("A word made from the first letters of a phrase, like NASA.", "What is an acronym?"),
-                    qa("This punctuation mark can create contractions like can't.", "What is an apostrophe?"),
-                ],
-                400: [
-                    qa("A word or phrase that reads the same backward and forward.", "What is a palindrome?"),
-                    qa("The repeated consonant sound at the beginning of nearby words is called this.", "What is alliteration?"),
-                ],
-                500: [
-                    qa("This literary device gives human traits to nonhuman things.", "What is personification?"),
-                    qa("A pun usually depends on this kind of double meaning.", "What is wordplay?"),
-                ],
-            },
-            "Odds & Ends": {
-                100: [
-                    qa("The largest ocean on Earth.", "What is the Pacific Ocean?"),
-                    qa("A standard die has this many sides.", "What is 6?"),
-                ],
-                200: [
-                    qa("This board game tells you to pass Go and collect $200.", "What is Monopoly?"),
-                    qa("The chess piece that moves in an L-shape.", "What is the knight?"),
-                ],
-                300: [
-                    qa("In Roman numerals, this letter stands for 500.", "What is D?"),
-                    qa("This is the common name for a baby kangaroo.", "What is a joey?"),
-                ],
-                400: [
-                    qa("This mythical creature is the national animal of Scotland.", "What is the unicorn?"),
-                    qa("A six-sided polygon is called this.", "What is a hexagon?"),
-                ],
-                500: [
-                    qa("This field of study focuses on flags.", "What is vexillology?"),
-                    qa("The only letter not used in the modern periodic table is this.", "What is J?"),
-                ],
-            },
-            "Geography": {
-                100: [
-                    qa("This is the capital of Japan.", "What is Tokyo?"),
-                    qa("This river runs through Egypt.", "What is the Nile?"),
-                ],
-                200: [
-                    qa("This desert stretches across much of northern Africa.", "What is the Sahara?"),
-                    qa("This country lies directly north of the United States.", "What is Canada?"),
-                ],
-                300: [
-                    qa("Mount Everest is part of this mountain range.", "What are the Himalayas?"),
-                    qa("This country contains the city of Barcelona.", "What is Spain?"),
-                ],
-                400: [
-                    qa("This is the capital of Australia.", "What is Canberra?"),
-                    qa("Greenland is the world's largest island that is not this.", "What is a continent?"),
-                ],
-                500: [
-                    qa("This strait separates Asia from North America.", "What is the Bering Strait?"),
-                    qa("Astana is the capital of this country.", "What is Kazakhstan?"),
-                ],
-            },
-            "Food & Drink": {
-                100: [
-                    qa("This fruit is mashed to make guacamole.", "What is an avocado?"),
-                    qa("Sushi is strongly associated with this country.", "What is Japan?"),
-                ],
-                200: [
-                    qa("Risotto is usually made from this grain.", "What is rice?"),
-                    qa("Citrus fruits are especially associated with this vitamin.", "What is Vitamin C?"),
-                ],
-                300: [
-                    qa("This yellow spice is common in many curries.", "What is turmeric?"),
-                    qa("This Italian dish is layered with pasta, cheese, and sauce.", "What is lasagna?"),
-                ],
-                400: [
-                    qa("This cheese is commonly found in a Greek salad.", "What is feta?"),
-                    qa("Soybeans are used to make this protein-rich food.", "What is tofu?"),
-                ],
-                500: [
-                    qa("The French culinary phrase meaning 'everything in its place.'", "What is mise en place?"),
-                    qa("This process turns grape juice into wine.", "What is fermentation?"),
-                ],
-            },
-            "Comics & Superheroes": {
-                100: [
-                    qa("Bruce Wayne is better known by this superhero name.", "Who is Batman?"),
-                    qa("Peter Parker becomes this superhero.", "Who is Spider-Man?"),
-                ],
-                200: [
-                    qa("Wakanda is home to this Marvel hero.", "Who is Black Panther?"),
-                    qa("Clark Kent is the alter ego of this hero.", "Who is Superman?"),
-                ],
-                300: [
-                    qa("This metal shield belongs to Captain America.", "What is vibranium?"),
-                    qa("Diana Prince is better known as this hero.", "Who is Wonder Woman?"),
-                ],
-                400: [
-                    qa("Tony Stark builds this powered suit identity.", "Who is Iron Man?"),
-                    qa("This villain is obsessed with chaos in The Dark Knight.", "Who is the Joker?"),
-                ],
-                500: [
-                    qa("The Infinity Gauntlet is most associated with this Marvel villain.", "Who is Thanos?"),
-                    qa("This team includes Cyclops, Storm, and Wolverine.", "Who are the X-Men?"),
-                ],
-            },
-        },
+QUESTION_BANK = {
+    "Science": {
+        200: [
+            {"question": "What planet is known as the Red Planet?", "answer": "Mars"},
+            {"question": "What gas do plants absorb from the atmosphere?", "answer": "Carbon dioxide"},
+            {"question": "What force keeps us on the ground?", "answer": "Gravity"},
+        ],
+        400: [
+            {"question": "What part of the cell contains genetic material?", "answer": "The nucleus"},
+            {"question": "What is H2O more commonly known as?", "answer": "Water"},
+            {"question": "What organ pumps blood through the human body?", "answer": "The heart"},
+        ],
+        600: [
+            {"question": "What is the speed of light commonly rounded to in miles per second?", "answer": "186,000 miles per second"},
+            {"question": "What is the chemical symbol for sodium?", "answer": "Na"},
+            {"question": "What process converts sugar into energy inside cells?", "answer": "Cellular respiration"},
+        ],
+        800: [
+            {"question": "What branch of physics studies heat and energy transfer?", "answer": "Thermodynamics"},
+            {"question": "What is the powerhouse of the cell?", "answer": "The mitochondrion"},
+            {"question": "What type of blood cells help fight infection?", "answer": "White blood cells"},
+        ],
+        1000: [
+            {"question": "What is the second most abundant gas in Earth’s atmosphere?", "answer": "Oxygen"},
+            {"question": "What scientist proposed the three laws of motion?", "answer": "Isaac Newton"},
+            {"question": "What scale measures the acidity or basicity of a substance?", "answer": "The pH scale"},
+        ],
     },
-    "round_2": {
-        "name": "Double Jiporady",
-        "values": [200, 400, 600, 800, 1000],
-        "bank": {
-            "World History": {
-                200: [
-                    qa("This wall fell in 1989, becoming a symbol of the end of Soviet control in Eastern Europe.", "What is the Berlin Wall?"),
-                    qa("This ship carried the Pilgrims across the Atlantic in 1620.", "What is the Mayflower?"),
-                ],
-                400: [
-                    qa("This French leader crowned himself emperor in 1804.", "Who is Napoleon Bonaparte?"),
-                    qa("This English document from 1215 is often cited as limiting royal power.", "What is the Magna Carta?"),
-                ],
-                600: [
-                    qa("The Great War is now better known by this name.", "What is World War I?"),
-                    qa("This empire was ruled at one point by Augustus, Rome's first emperor.", "What is the Roman Empire?"),
-                ],
-                800: [
-                    qa("This peace treaty formally ended World War I.", "What is the Treaty of Versailles?"),
-                    qa("Joan of Arc is associated with this country.", "What is France?"),
-                ],
-                1000: [
-                    qa("This dynasty built much of the Great Wall of China as commonly seen today.", "What is the Ming Dynasty?"),
-                    qa("The French Revolution began in this year.", "What is 1789?"),
-                ],
-            },
-            "Video Games": {
-                200: [
-                    qa("Nintendo's mustachioed mascot who often rescues Princess Peach.", "Who is Mario?"),
-                    qa("This Mojang sandbox game lets players build with blocks and fight the Ender Dragon.", "What is Minecraft?"),
-                ],
-                400: [
-                    qa("Link often wields this legendary blade in The Legend of Zelda.", "What is the Master Sword?"),
-                    qa("The company behind the PlayStation brand.", "What is Sony?"),
-                ],
-                600: [
-                    qa("This 2023 RPG by Larian Studios won many Game of the Year awards.", "What is Baldur's Gate 3?"),
-                    qa("Master Chief is the iconic hero of this Xbox franchise.", "What is Halo?"),
-                ],
-                800: [
-                    qa("This battle royale game from Epic Games is known for building mechanics and seasonal events.", "What is Fortnite?"),
-                    qa("The companion cube appears in this puzzle game series by Valve.", "What is Portal?"),
-                ],
-                1000: [
-                    qa("This company created the Pokémon franchise alongside Game Freak and Creatures.", "What is Nintendo?"),
-                    qa("In Pac-Man, these colored enemies chase the player through a maze.", "What are ghosts?"),
-                ],
-            },
-            "Books & Authors": {
-                200: [
-                    qa("She wrote Pride and Prejudice.", "Who is Jane Austen?"),
-                    qa("This author created Middle-earth and wrote The Hobbit.", "Who is J.R.R. Tolkien?"),
-                ],
-                400: [
-                    qa("In Animal Farm, this pig becomes a dictator-like figure.", "Who is Napoleon?"),
-                    qa("Herman Melville wrote this whaling novel.", "What is Moby-Dick?"),
-                ],
-                600: [
-                    qa("George Orwell also wrote this dystopian novel.", "What is 1984?"),
-                    qa("Odysseus is the hero of this epic poem.", "What is The Odyssey?"),
-                ],
-                800: [
-                    qa("Atticus Finch appears in this Harper Lee novel.", "What is To Kill a Mockingbird?"),
-                    qa("This poet wrote The Raven.", "Who is Edgar Allan Poe?"),
-                ],
-                1000: [
-                    qa("Gabriel García Márquez wrote this novel about the Buendía family.", "What is One Hundred Years of Solitude?"),
-                    qa("Fyodor Dostoevsky wrote this novel featuring Raskolnikov.", "What is Crime and Punishment?"),
-                ],
-            },
-            "Sports": {
-                200: [
-                    qa("This sport uses terms like birdie, eagle, and bogey.", "What is golf?"),
-                    qa("A soccer team has this many players on the field at one time, including the goalkeeper.", "What is 11?"),
-                ],
-                400: [
-                    qa("Michael Jordan played most famously for this NBA team.", "What are the Chicago Bulls?"),
-                    qa("The Stanley Cup is awarded in this sport.", "What is hockey?"),
-                ],
-                600: [
-                    qa("RBI in baseball stands for this.", "What is runs batted in?"),
-                    qa("Wimbledon is associated with this sport.", "What is tennis?"),
-                ],
-                800: [
-                    qa("Muhammad Ali was known by this self-chosen nickname.", "What is The Greatest?"),
-                    qa("Fenway Park is home to this MLB team.", "Who are the Boston Red Sox?"),
-                ],
-                1000: [
-                    qa("A green jacket is awarded to the winner of this tournament.", "What is The Masters?"),
-                    qa("The Tour de France is contested in this sport.", "What is cycling?"),
-                ],
-            },
-            "Hard Science": {
-                200: [
-                    qa("H2O is the chemical formula for this substance.", "What is water?"),
-                    qa("A substance with a pH below 7 is this.", "What is acidic?"),
-                ],
-                400: [
-                    qa("This branch of physics studies heat, work, temperature, and energy transfer.", "What is thermodynamics?"),
-                    qa("This subatomic particle has a negative electric charge.", "What is an electron?"),
-                ],
-                600: [
-                    qa("This scientist proposed the uncertainty principle.", "Who is Werner Heisenberg?"),
-                    qa("This organelle is often called the powerhouse of the cell.", "What is the mitochondrion?"),
-                ],
-                800: [
-                    qa("Sodium's chemical symbol is this.", "What is Na?"),
-                    qa("This blood cell type helps fight infection.", "What are white blood cells?"),
-                ],
-                1000: [
-                    qa("This scale measures acidity and basicity.", "What is the pH scale?"),
-                    qa("Isaac Newton is associated with these three famous laws.", "What are the laws of motion?"),
-                ],
-            },
-            "2000s-2020s Pop Culture": {
-                200: [
-                    qa("This HBO fantasy series ended in 2019 after eight seasons.", "What is Game of Thrones?"),
-                    qa("Many Marvel heroes reunited in this blockbuster after Infinity War.", "What is Avengers: Endgame?"),
-                ],
-                400: [
-                    qa("This short-form video app exploded globally in the late 2010s and early 2020s.", "What is TikTok?"),
-                    qa("Greta Gerwig directed this 2023 movie based on a famous Mattel doll.", "What is Barbie?"),
-                ],
-                600: [
-                    qa("Kendrick Lamar won a Pulitzer Prize for this album.", "What is DAMN.?"),
-                    qa("This singer's Eras Tour became a huge global phenomenon.", "Who is Taylor Swift?"),
-                ],
-                800: [
-                    qa("Pedro Pascal starred as Joel in this HBO adaptation of a hit video game.", "What is The Last of Us?"),
-                    qa("This sci-fi series on Netflix helped revive Kate Bush's Running Up That Hill.", "What is Stranger Things?"),
-                ],
-                1000: [
-                    qa("This South Korean series about deadly games became a global hit in 2021.", "What is Squid Game?"),
-                    qa("This pop star's album Sour featured songs like drivers license and good 4 u.", "Who is Olivia Rodrigo?"),
-                ],
-            },
-            "Myth & Legend": {
-                200: [
-                    qa("In Greek myth, this hero slew the Minotaur.", "Who is Theseus?"),
-                    qa("This Norse god wields the hammer Mjolnir.", "Who is Thor?"),
-                ],
-                400: [
-                    qa("This Greek king's touch turned things to gold.", "Who is Midas?"),
-                    qa("The winged horse of Greek myth is this.", "Who is Pegasus?"),
-                ],
-                600: [
-                    qa("This river in Greek mythology was crossed by Charon.", "What is the Styx?"),
-                    qa("In Arthurian legend, this sword was drawn from the stone.", "What is Excalibur?"),
-                ],
-                800: [
-                    qa("This creature guards treasure and breathes fire in many legends.", "What is a dragon?"),
-                    qa("Odin belongs to this mythology.", "What is Norse mythology?"),
-                ],
-                1000: [
-                    qa("This city was said to be destroyed after Greek warriors emerged from a wooden horse.", "What is Troy?"),
-                    qa("The Labyrinth was built on this island.", "What is Crete?"),
-                ],
-            },
-            "Animals": {
-                200: [
-                    qa("The largest land animal.", "What is the African elephant?"),
-                    qa("This mammal is the only one capable of powered flight.", "What is a bat?"),
-                ],
-                400: [
-                    qa("A group of lions is called this.", "What is a pride?"),
-                    qa("This animal is famous for building dams.", "What is a beaver?"),
-                ],
-                600: [
-                    qa("The fastest land animal.", "What is the cheetah?"),
-                    qa("A baby sheep is called this.", "What is a lamb?"),
-                ],
-                800: [
-                    qa("The largest species of penguin.", "What is the emperor penguin?"),
-                    qa("This Australian animal has fingerprints so close to humans they can confuse investigators.", "What is a koala?"),
-                ],
-                1000: [
-                    qa("This intelligent marine mammal is known for echolocation.", "What is a dolphin?"),
-                    qa("This bird can rotate its head dramatically and usually hunts at night.", "What is an owl?"),
-                ],
-            },
-            "Math & Logic": {
-                200: [
-                    qa("A triangle with all three sides equal is called this.", "What is an equilateral triangle?"),
-                    qa("This Roman numeral represents 50.", "What is L?"),
-                ],
-                400: [
-                    qa("A data structure that uses FIFO order.", "What is a queue?"),
-                    qa("The result of 12 times 12.", "What is 144?"),
-                ],
-                600: [
-                    qa("In algebra, a value that makes an equation true is often called this.", "What is a solution?"),
-                    qa("A number divisible only by 1 and itself is called this.", "What is a prime number?"),
-                ],
-                800: [
-                    qa("This branch of math studies points, lines, angles, and shapes.", "What is geometry?"),
-                    qa("A statement that is true by definition or assumed as a starting point is often called this.", "What is an axiom?"),
-                ],
-                1000: [
-                    qa("This famous sequence begins 1, 1, 2, 3, 5, 8.", "What is the Fibonacci sequence?"),
-                    qa("In computing and logic, true/false algebra is named for this mathematician.", "Who is George Boole?"),
-                ],
-            },
-        },
+
+    "History": {
+        200: [
+            {"question": "What ancient civilization built the pyramids?", "answer": "The Egyptians"},
+            {"question": "Who was the first president of the United States?", "answer": "George Washington"},
+            {"question": "What wall famously divided Berlin?", "answer": "The Berlin Wall"},
+        ],
+        400: [
+            {"question": "In what year did World War II end?", "answer": "1945"},
+            {"question": "Who was known as the Maid of Orléans?", "answer": "Joan of Arc"},
+            {"question": "What ship sank on its maiden voyage in 1912?", "answer": "The Titanic"},
+        ],
+        600: [
+            {"question": "What empire was ruled by Julius Caesar?", "answer": "Rome / the Roman Republic"},
+            {"question": "What document begins with 'We the People'?", "answer": "The U.S. Constitution"},
+            {"question": "Who purchased Alaska from Russia?", "answer": "The United States"},
+        ],
+        800: [
+            {"question": "What war was fought between the North and South regions of the United States?", "answer": "The Civil War"},
+            {"question": "Who was the British prime minister during most of World War II?", "answer": "Winston Churchill"},
+            {"question": "What year did the French Revolution begin?", "answer": "1789"},
+        ],
+        1000: [
+            {"question": "What peace treaty ended World War I?", "answer": "The Treaty of Versailles"},
+            {"question": "Who was the first emperor of Rome?", "answer": "Augustus"},
+            {"question": "What dynasty built much of the Great Wall of China as seen today?", "answer": "The Ming Dynasty"},
+        ],
+    },
+
+    "Geography": {
+        200: [
+            {"question": "What is the largest ocean on Earth?", "answer": "The Pacific Ocean"},
+            {"question": "What river runs through Egypt?", "answer": "The Nile"},
+            {"question": "What country is directly north of the United States?", "answer": "Canada"},
+        ],
+        400: [
+            {"question": "What is the capital of Japan?", "answer": "Tokyo"},
+            {"question": "What desert covers much of northern Africa?", "answer": "The Sahara"},
+            {"question": "What mountain range includes Mount Everest?", "answer": "The Himalayas"},
+        ],
+        600: [
+            {"question": "What is the smallest U.S. state by area?", "answer": "Rhode Island"},
+            {"question": "What country has the city of Barcelona?", "answer": "Spain"},
+            {"question": "What is the longest river in South America?", "answer": "The Amazon River"},
+        ],
+        800: [
+            {"question": "What is the capital of Australia?", "answer": "Canberra"},
+            {"question": "What strait separates Asia from North America?", "answer": "The Bering Strait"},
+            {"question": "What African lake is the source of the White Nile?", "answer": "Lake Victoria"},
+        ],
+        1000: [
+            {"question": "What is the world’s largest island that is not a continent?", "answer": "Greenland"},
+            {"question": "What is the capital of Kazakhstan?", "answer": "Astana"},
+            {"question": "What sea lies between Europe and Africa?", "answer": "The Mediterranean Sea"},
+        ],
+    },
+
+    "Movies": {
+        200: [
+            {"question": "What film features a shark terrorizing Amity Island?", "answer": "Jaws"},
+            {"question": "Who is the wizard headmaster in Harry Potter?", "answer": "Albus Dumbledore"},
+            {"question": "What yellow creatures appear in Despicable Me?", "answer": "Minions"},
+        ],
+        400: [
+            {"question": "What movie says 'Life is like a box of chocolates'?", "answer": "Forrest Gump"},
+            {"question": "What 1997 film is about a doomed ocean liner romance?", "answer": "Titanic"},
+            {"question": "What film introduced audiences to Wakanda?", "answer": "Black Panther"},
+        ],
+        600: [
+            {"question": "Who directed E.T. the Extra-Terrestrial?", "answer": "Steven Spielberg"},
+            {"question": "What movie features the song 'Let It Go'?", "answer": "Frozen"},
+            {"question": "What is the name of Han Solo’s ship?", "answer": "The Millennium Falcon"},
+        ],
+        800: [
+            {"question": "What film won Best Picture at the Oscars for 2020 ceremony?", "answer": "Parasite"},
+            {"question": "Who played the Joker in The Dark Knight?", "answer": "Heath Ledger"},
+            {"question": "What trilogy includes the character Aragorn?", "answer": "The Lord of the Rings"},
+        ],
+        1000: [
+            {"question": "What Akira Kurosawa film inspired many later westerns and ensemble stories?", "answer": "Seven Samurai"},
+            {"question": "What 1942 classic is set largely in Morocco?", "answer": "Casablanca"},
+            {"question": "What film follows Cobb through layered dreams?", "answer": "Inception"},
+        ],
+    },
+
+    "Music": {
+        200: [
+            {"question": "How many keys are on a standard piano?", "answer": "88"},
+            {"question": "What instrument has six strings and is often electric or acoustic?", "answer": "The guitar"},
+            {"question": "What clef is commonly used for higher-pitched notes?", "answer": "Treble clef"},
+        ],
+        400: [
+            {"question": "What family of instruments includes trumpet and trombone?", "answer": "Brass"},
+            {"question": "Who is known as the King of Pop?", "answer": "Michael Jackson"},
+            {"question": "What band recorded 'Hey Jude'?", "answer": "The Beatles"},
+        ],
+        600: [
+            {"question": "What is the musical term for gradually getting louder?", "answer": "Crescendo"},
+            {"question": "What composer wrote The Four Seasons?", "answer": "Vivaldi"},
+            {"question": "What singer is nicknamed 'The Boss'?", "answer": "Bruce Springsteen"},
+        ],
+        800: [
+            {"question": "What genre originated in Jamaica and influenced ska and dub?", "answer": "Reggae"},
+            {"question": "What singer released the album 21?", "answer": "Adele"},
+            {"question": "What instrument does Yo-Yo Ma play?", "answer": "The cello"},
+        ],
+        1000: [
+            {"question": "Who composed the Moonlight Sonata?", "answer": "Beethoven"},
+            {"question": "What singer-songwriter wrote 'Like a Rolling Stone'?", "answer": "Bob Dylan"},
+            {"question": "What city is strongly associated with Motown?", "answer": "Detroit"},
+        ],
+    },
+
+    "Sports": {
+        200: [
+            {"question": "How many points is a touchdown worth in American football?", "answer": "6"},
+            {"question": "What sport uses a puck?", "answer": "Hockey"},
+            {"question": "In baseball, how many strikes make an out?", "answer": "3"},
+        ],
+        400: [
+            {"question": "What country hosted the 2016 Summer Olympics?", "answer": "Brazil"},
+            {"question": "What sport is Wimbledon associated with?", "answer": "Tennis"},
+            {"question": "How many players are on the court for one basketball team at a time?", "answer": "5"},
+        ],
+        600: [
+            {"question": "What golfer is nicknamed Tiger?", "answer": "Tiger Woods"},
+            {"question": "What race is known as 'The Fastest Two Minutes in Sports'?", "answer": "The Kentucky Derby"},
+            {"question": "What sport features the Tour de France?", "answer": "Cycling"},
+        ],
+        800: [
+            {"question": "What country invented judo?", "answer": "Japan"},
+            {"question": "What is the maximum score with one dart in standard darts?", "answer": "60"},
+            {"question": "What MLB team is associated with Fenway Park?", "answer": "The Boston Red Sox"},
+        ],
+        1000: [
+            {"question": "What boxer was known as 'The Greatest'?", "answer": "Muhammad Ali"},
+            {"question": "What sport awards a green jacket to its champion?", "answer": "Golf / The Masters"},
+            {"question": "In soccer, what is a score of 0-0 often called?", "answer": "A nil-nil draw"},
+        ],
+    },
+
+    "Literature": {
+        200: [
+            {"question": "Who wrote Charlotte’s Web?", "answer": "E. B. White"},
+            {"question": "Who created Sherlock Holmes?", "answer": "Arthur Conan Doyle"},
+            {"question": "What is the last name of Tom Sawyer’s creator, Mark?", "answer": "Twain"},
+        ],
+        400: [
+            {"question": "Who wrote Pride and Prejudice?", "answer": "Jane Austen"},
+            {"question": "What novel begins with Ishmael narrating a whaling voyage?", "answer": "Moby-Dick"},
+            {"question": "Who wrote The Great Gatsby?", "answer": "F. Scott Fitzgerald"},
+        ],
+        600: [
+            {"question": "Who wrote 1984?", "answer": "George Orwell"},
+            {"question": "What epic poem features Odysseus returning home?", "answer": "The Odyssey"},
+            {"question": "Who wrote The Raven?", "answer": "Edgar Allan Poe"},
+        ],
+        800: [
+            {"question": "What Shakespeare play features Rosencrantz and Guildenstern?", "answer": "Hamlet"},
+            {"question": "Who wrote Beloved?", "answer": "Toni Morrison"},
+            {"question": "What novel features Atticus Finch?", "answer": "To Kill a Mockingbird"},
+        ],
+        1000: [
+            {"question": "Who wrote One Hundred Years of Solitude?", "answer": "Gabriel García Márquez"},
+            {"question": "What Russian author wrote Crime and Punishment?", "answer": "Fyodor Dostoevsky"},
+            {"question": "Who wrote The Sound and the Fury?", "answer": "William Faulkner"},
+        ],
+    },
+
+    "Technology": {
+        200: [
+            {"question": "What does CPU stand for?", "answer": "Central Processing Unit"},
+            {"question": "What company created Windows?", "answer": "Microsoft"},
+            {"question": "What does URL stand for?", "answer": "Uniform Resource Locator"},
+        ],
+        400: [
+            {"question": "What language is primarily used to style web pages?", "answer": "CSS"},
+            {"question": "What does RAM stand for?", "answer": "Random Access Memory"},
+            {"question": "What open-source operating system kernel powers many servers?", "answer": "Linux"},
+        ],
+        600: [
+            {"question": "What protocol commonly secures web traffic with encryption?", "answer": "HTTPS"},
+            {"question": "In Git, what command copies a repository to your local machine?", "answer": "git clone"},
+            {"question": "What company created the iPhone?", "answer": "Apple"},
+        ],
+        800: [
+            {"question": "What database language uses SELECT statements?", "answer": "SQL"},
+            {"question": "What does API stand for?", "answer": "Application Programming Interface"},
+            {"question": "What tag usually contains JavaScript in an HTML page?", "answer": "<script>"},
+        ],
+        1000: [
+            {"question": "What data structure uses FIFO order?", "answer": "A queue"},
+            {"question": "What does DNS translate domain names into?", "answer": "IP addresses"},
+            {"question": "What version control system is widely used with GitHub?", "answer": "Git"},
+        ],
+    },
+
+    "Random Trivia": {
+        200: [
+            {"question": "What color do you get when you mix blue and yellow?", "answer": "Green"},
+            {"question": "How many sides does a hexagon have?", "answer": "6"},
+            {"question": "What day comes after Friday?", "answer": "Saturday"},
+        ],
+        400: [
+            {"question": "What is the largest mammal?", "answer": "The blue whale"},
+            {"question": "What is the common name for a baby kangaroo?", "answer": "A joey"},
+            {"question": "What board game features Park Place and Boardwalk?", "answer": "Monopoly"},
+        ],
+        600: [
+            {"question": "What is the only letter not used in the periodic table?", "answer": "J"},
+            {"question": "What is the tallest breed of dog?", "answer": "The Great Dane"},
+            {"question": "What planet has the most moons currently recognized in common trivia?", "answer": "Saturn"},
+        ],
+        800: [
+            {"question": "What is the fear of spiders called?", "answer": "Arachnophobia"},
+            {"question": "What does a vexillologist study?", "answer": "Flags"},
+            {"question": "What is the national animal of Scotland in mythology?", "answer": "The unicorn"},
+        ],
+        1000: [
+            {"question": "What chess piece can move in an L-shape?", "answer": "The knight"},
+            {"question": "What is the world’s most spoken native language?", "answer": "Mandarin Chinese"},
+            {"question": "What does the 'D' in D-Day stand for?", "answer": "It does not stand for anything specific / Day"},
+        ],
+    },
+
+    "Food & Drink": {
+        200: [
+            {"question": "What fruit is used to make guacamole?", "answer": "Avocado"},
+            {"question": "What dairy product is commonly added to coffee?", "answer": "Milk / cream"},
+            {"question": "Sushi is most associated with what country?", "answer": "Japan"},
+        ],
+        400: [
+            {"question": "What grain is risotto usually made from?", "answer": "Rice"},
+            {"question": "What vitamin is especially associated with citrus fruits?", "answer": "Vitamin C"},
+            {"question": "What Italian dish is layered with pasta, sauce, and cheese?", "answer": "Lasagna"},
+        ],
+        600: [
+            {"question": "What spice is most associated with yellow curry color?", "answer": "Turmeric"},
+            {"question": "What French term means 'everything in its place' in professional kitchens?", "answer": "Mise en place"},
+            {"question": "What cut of pork is used for pulled pork barbecue?", "answer": "Pork shoulder / Boston butt"},
+        ],
+        800: [
+            {"question": "What cheese is traditionally used in a Greek salad?", "answer": "Feta"},
+            {"question": "What is the primary spirit in a traditional martini?", "answer": "Gin"},
+            {"question": "What bean is used to make tofu?", "answer": "Soybean"},
+        ],
+        1000: [
+            {"question": "What Japanese dish consists of vinegared rice with toppings or fillings?", "answer": "Sushi"},
+            {"question": "What process turns grape juice into wine?", "answer": "Fermentation"},
+            {"question": "What is the French mother sauce made from milk thickened with a white roux?", "answer": "Béchamel"},
+        ],
+    },
+
+    "Animals": {
+        200: [
+            {"question": "What is the largest land animal?", "answer": "The African elephant"},
+            {"question": "What animal is known for changing color to blend in?", "answer": "The chameleon"},
+            {"question": "What bird is the symbol of peace?", "answer": "The dove"},
+        ],
+        400: [
+            {"question": "What mammal can truly fly?", "answer": "The bat"},
+            {"question": "What is a group of lions called?", "answer": "A pride"},
+            {"question": "What animal is famous for building dams?", "answer": "The beaver"},
+        ],
+        600: [
+            {"question": "What is the fastest land animal?", "answer": "The cheetah"},
+            {"question": "What marine mammal is known for echolocation and high intelligence?", "answer": "The dolphin"},
+            {"question": "What is a baby sheep called?", "answer": "A lamb"},
+        ],
+        800: [
+            {"question": "What is the largest species of penguin?", "answer": "The emperor penguin"},
+            {"question": "What animal’s fingerprints are so close to humans they can confuse crime scenes?", "answer": "The koala"},
+            {"question": "What reptile has no legs and sheds its skin?", "answer": "A snake"},
+        ],
+        1000: [
+            {"question": "What bird can rotate its head dramatically and hunts mostly at night?", "answer": "An owl"},
+            {"question": "What horned African herbivore is often confused with the Asian water buffalo?", "answer": "The wildebeest / gnu"},
+            {"question": "What is the only mammal capable of powered flight?", "answer": "The bat"},
+        ],
     },
 }
 
-FINAL_BANK = [
-    {
-        "category": "Final Jiporady: Pop Culture + Tech",
-        "question": "This 1999 sci-fi film shares its title with a mathematical structure used in computer science and linear algebra.",
-        "answer": "What is The Matrix?",
-    },
-    {
-        "category": "Final Jiporady: World History",
-        "question": "This 1215 document is often described as an early limitation on the power of the English king.",
-        "answer": "What is the Magna Carta?",
-    },
-    {
-        "category": "Final Jiporady: Literature",
-        "question": "This author created Middle-earth and wrote The Hobbit and The Lord of the Rings.",
-        "answer": "Who is J.R.R. Tolkien?",
-    },
-    {
-        "category": "Final Jiporady: Science",
-        "question": "This planet is famous for its prominent ring system and is the second largest in our solar system.",
-        "answer": "What is Saturn?",
-    },
-    {
-        "category": "Final Jiporady: Geography",
-        "question": "This African river flows north and is strongly associated with Egypt.",
-        "answer": "What is the Nile?",
-    },
-    {
-        "category": "Final Jiporady: Computing",
-        "question": "This system translates domain names like example.com into numeric network addresses.",
-        "answer": "What is DNS?",
-    },
-]
+
+def get_master_bank():
+    return deepcopy(QUESTION_BANK)
