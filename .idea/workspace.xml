@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4de38b69-9ba5-4320-a24a-61c62a96938a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/.idea/promptardy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Jipoardy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/Procfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/question_bank.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/render.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/static/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/static/css/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/static/js/game.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/static/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promptardy_render_bundle.zip" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "shnider42"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/shnider42/jiporady.git",
+    "accountId": "20207739-5324-4edc-b743-43a87f582522"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="3CAqSpxuGejVgGgXsTa7sFvUBTA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-1f1b7bcced7d-64d779b69b7a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.29188.22" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4de38b69-9ba5-4320-a24a-61c62a96938a" name="Changes" comment="" />
+      <created>1775838724994</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1775838724994</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>
