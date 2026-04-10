@@ -4,27 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4de38b69-9ba5-4320-a24a-61c62a96938a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/.idea/promptardy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Jipoardy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/Procfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/app.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/question_bank.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/render.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/static/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/static/css/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/static/js/game.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/static/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/templates/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy_render_bundle.zip" beforeDir="false" />
+    <list default="true" id="4de38b69-9ba5-4320-a24a-61c62a96938a" name="Changes" comment="rocket league attempt 2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +58,29 @@
       <option name="presentableId" value="Default" />
       <updated>1775838724994</updated>
     </task>
+    <task id="LOCAL-00001" summary="rocket league">
+      <option name="closed" value="true" />
+      <created>1775839745388</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1775839745388</updated>
+    </task>
+    <task id="LOCAL-00002" summary="rocket league attempt 2">
+      <option name="closed" value="true" />
+      <created>1775839969523</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1775839969523</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="rocket league" />
+    <MESSAGE value="rocket league attempt 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="rocket league attempt 2" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
