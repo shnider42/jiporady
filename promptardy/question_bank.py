@@ -1,324 +1,451 @@
-from __future__ import annotations
+def qa(question, answer):
+    return {"question": question, "answer": answer}
 
-import random
-from typing import Any
 
-QUESTION_BANK = [
+APP_TITLE = "Jiporady"
+APP_SUBTITLE = "A bigger, louder, random-per-session Jeopardy-style party board"
+CATEGORY_COUNT = 6
+
+ROUND_DEFS = {
+    "round_1": {
+        "name": "Round 1",
+        "values": [100, 200, 300, 400, 500],
+        "bank": {
+            "Science & Space": {
+                100: [
+                    qa("This ringed planet is the second largest in our solar system.", "What is Saturn?"),
+                    qa("This planet is known as the Red Planet.", "What is Mars?"),
+                ],
+                200: [
+                    qa("This force keeps planets in orbit and keeps your feet on the ground.", "What is gravity?"),
+                    qa("Plants use sunlight to perform this process.", "What is photosynthesis?"),
+                ],
+                300: [
+                    qa("Most of a cell's DNA is found here.", "What is the nucleus?"),
+                    qa("This is the nearest star to Earth.", "What is the Sun?"),
+                ],
+                400: [
+                    qa("This instrument is used to look at stars and distant galaxies.", "What is a telescope?"),
+                    qa("Water freezes at this temperature on the Celsius scale.", "What is 0 degrees Celsius?"),
+                ],
+                500: [
+                    qa("Named for an Italian physicist, this paradox asks why we have not clearly detected alien civilizations.", "What is the Fermi paradox?"),
+                    qa("This layer of Earth's atmosphere contains the ozone layer.", "What is the stratosphere?"),
+                ],
+            },
+            "Movies & TV": {
+                100: [
+                    qa("This blue alien experiment is the title character in a Disney film with Lilo.", "Who is Stitch?"),
+                    qa("This sitcom is set in the Scranton branch of Dunder Mifflin.", "What is The Office?"),
+                ],
+                200: [
+                    qa("In Breaking Bad, Walter White teaches this subject before becoming a drug kingpin.", "What is chemistry?"),
+                    qa("This 1999 film stars Neo, Morpheus, and Trinity.", "What is The Matrix?"),
+                ],
+                300: [
+                    qa("The Stark family appears in this HBO fantasy series.", "What is Game of Thrones?"),
+                    qa("This movie features a theme park filled with cloned dinosaurs.", "What is Jurassic Park?"),
+                ],
+                400: [
+                    qa("Bong Joon-ho directed this Best Picture winner about two very different families.", "What is Parasite?"),
+                    qa("This sitcom follows six friends living in New York City.", "What is Friends?"),
+                ],
+                500: [
+                    qa("This filmmaker directed Jaws, E.T., and Jurassic Park.", "Who is Steven Spielberg?"),
+                    qa("In Star Wars, this smuggler pilots the Millennium Falcon.", "Who is Han Solo?"),
+                ],
+            },
+            "Music & Pop Culture": {
+                100: [
+                    qa("Taylor Swift first broke out mainly in this genre before becoming a pop superstar.", "What is country?"),
+                    qa("This singer is known as the King of Pop.", "Who is Michael Jackson?"),
+                ],
+                200: [
+                    qa("This artist released the album Renaissance.", "Who is Beyoncé?"),
+                    qa("This K-pop group includes RM, Jin, Suga, j-hope, Jimin, V, and Jung Kook.", "Who are BTS?"),
+                ],
+                300: [
+                    qa("The Beatles came from this English city.", "What is Liverpool?"),
+                    qa("This rapper was born Aubrey Graham.", "Who is Drake?"),
+                ],
+                400: [
+                    qa("This singer's 2024 album was The Tortured Poets Department.", "Who is Taylor Swift?"),
+                    qa("This singer is nicknamed The Boss.", "Who is Bruce Springsteen?"),
+                ],
+                500: [
+                    qa("This music term means gradually getting louder.", "What is crescendo?"),
+                    qa("This Detroit-based label is associated with artists like Stevie Wonder and The Supremes.", "What is Motown?"),
+                ],
+            },
+            "Internet & Tech": {
+                100: [
+                    qa("The 'www' in a web address stands for this.", "What is World Wide Web?"),
+                    qa("This company created the iPhone.", "What is Apple?"),
+                ],
+                200: [
+                    qa("Linus Torvalds created this open-source operating system kernel.", "What is Linux?"),
+                    qa("This version-control platform is now owned by Microsoft.", "What is GitHub?"),
+                ],
+                300: [
+                    qa("HTTP stands for this.", "What is Hypertext Transfer Protocol?"),
+                    qa("RAM stands for this.", "What is Random Access Memory?"),
+                ],
+                400: [
+                    qa("This language is primarily used to style web pages.", "What is CSS?"),
+                    qa("An API stands for this.", "What is an Application Programming Interface?"),
+                ],
+                500: [
+                    qa("DNS translates domain names into these.", "What are IP addresses?"),
+                    qa("In Git, this command copies a remote repository to your local machine.", "What is git clone?"),
+                ],
+            },
+            "Wordplay": {
+                100: [
+                    qa("A word with the opposite meaning of another word.", "What is an antonym?"),
+                    qa("A word that sounds like another but has a different meaning, like sea and see.", "What is a homophone?"),
+                ],
+                200: [
+                    qa("A comparison using 'like' or 'as.'", "What is a simile?"),
+                    qa("A figure of speech in which a thing is described as being something else.", "What is a metaphor?"),
+                ],
+                300: [
+                    qa("A word made from the first letters of a phrase, like NASA.", "What is an acronym?"),
+                    qa("This punctuation mark can create contractions like can't.", "What is an apostrophe?"),
+                ],
+                400: [
+                    qa("A word or phrase that reads the same backward and forward.", "What is a palindrome?"),
+                    qa("The repeated consonant sound at the beginning of nearby words is called this.", "What is alliteration?"),
+                ],
+                500: [
+                    qa("This literary device gives human traits to nonhuman things.", "What is personification?"),
+                    qa("A pun usually depends on this kind of double meaning.", "What is wordplay?"),
+                ],
+            },
+            "Odds & Ends": {
+                100: [
+                    qa("The largest ocean on Earth.", "What is the Pacific Ocean?"),
+                    qa("A standard die has this many sides.", "What is 6?"),
+                ],
+                200: [
+                    qa("This board game tells you to pass Go and collect $200.", "What is Monopoly?"),
+                    qa("The chess piece that moves in an L-shape.", "What is the knight?"),
+                ],
+                300: [
+                    qa("In Roman numerals, this letter stands for 500.", "What is D?"),
+                    qa("This is the common name for a baby kangaroo.", "What is a joey?"),
+                ],
+                400: [
+                    qa("This mythical creature is the national animal of Scotland.", "What is the unicorn?"),
+                    qa("A six-sided polygon is called this.", "What is a hexagon?"),
+                ],
+                500: [
+                    qa("This field of study focuses on flags.", "What is vexillology?"),
+                    qa("The only letter not used in the modern periodic table is this.", "What is J?"),
+                ],
+            },
+            "Geography": {
+                100: [
+                    qa("This is the capital of Japan.", "What is Tokyo?"),
+                    qa("This river runs through Egypt.", "What is the Nile?"),
+                ],
+                200: [
+                    qa("This desert stretches across much of northern Africa.", "What is the Sahara?"),
+                    qa("This country lies directly north of the United States.", "What is Canada?"),
+                ],
+                300: [
+                    qa("Mount Everest is part of this mountain range.", "What are the Himalayas?"),
+                    qa("This country contains the city of Barcelona.", "What is Spain?"),
+                ],
+                400: [
+                    qa("This is the capital of Australia.", "What is Canberra?"),
+                    qa("Greenland is the world's largest island that is not this.", "What is a continent?"),
+                ],
+                500: [
+                    qa("This strait separates Asia from North America.", "What is the Bering Strait?"),
+                    qa("Astana is the capital of this country.", "What is Kazakhstan?"),
+                ],
+            },
+            "Food & Drink": {
+                100: [
+                    qa("This fruit is mashed to make guacamole.", "What is an avocado?"),
+                    qa("Sushi is strongly associated with this country.", "What is Japan?"),
+                ],
+                200: [
+                    qa("Risotto is usually made from this grain.", "What is rice?"),
+                    qa("Citrus fruits are especially associated with this vitamin.", "What is Vitamin C?"),
+                ],
+                300: [
+                    qa("This yellow spice is common in many curries.", "What is turmeric?"),
+                    qa("This Italian dish is layered with pasta, cheese, and sauce.", "What is lasagna?"),
+                ],
+                400: [
+                    qa("This cheese is commonly found in a Greek salad.", "What is feta?"),
+                    qa("Soybeans are used to make this protein-rich food.", "What is tofu?"),
+                ],
+                500: [
+                    qa("The French culinary phrase meaning 'everything in its place.'", "What is mise en place?"),
+                    qa("This process turns grape juice into wine.", "What is fermentation?"),
+                ],
+            },
+            "Comics & Superheroes": {
+                100: [
+                    qa("Bruce Wayne is better known by this superhero name.", "Who is Batman?"),
+                    qa("Peter Parker becomes this superhero.", "Who is Spider-Man?"),
+                ],
+                200: [
+                    qa("Wakanda is home to this Marvel hero.", "Who is Black Panther?"),
+                    qa("Clark Kent is the alter ego of this hero.", "Who is Superman?"),
+                ],
+                300: [
+                    qa("This metal shield belongs to Captain America.", "What is vibranium?"),
+                    qa("Diana Prince is better known as this hero.", "Who is Wonder Woman?"),
+                ],
+                400: [
+                    qa("Tony Stark builds this powered suit identity.", "Who is Iron Man?"),
+                    qa("This villain is obsessed with chaos in The Dark Knight.", "Who is the Joker?"),
+                ],
+                500: [
+                    qa("The Infinity Gauntlet is most associated with this Marvel villain.", "Who is Thanos?"),
+                    qa("This team includes Cyclops, Storm, and Wolverine.", "Who are the X-Men?"),
+                ],
+            },
+        },
+    },
+    "round_2": {
+        "name": "Double Jiporady",
+        "values": [200, 400, 600, 800, 1000],
+        "bank": {
+            "World History": {
+                200: [
+                    qa("This wall fell in 1989, becoming a symbol of the end of Soviet control in Eastern Europe.", "What is the Berlin Wall?"),
+                    qa("This ship carried the Pilgrims across the Atlantic in 1620.", "What is the Mayflower?"),
+                ],
+                400: [
+                    qa("This French leader crowned himself emperor in 1804.", "Who is Napoleon Bonaparte?"),
+                    qa("This English document from 1215 is often cited as limiting royal power.", "What is the Magna Carta?"),
+                ],
+                600: [
+                    qa("The Great War is now better known by this name.", "What is World War I?"),
+                    qa("This empire was ruled at one point by Augustus, Rome's first emperor.", "What is the Roman Empire?"),
+                ],
+                800: [
+                    qa("This peace treaty formally ended World War I.", "What is the Treaty of Versailles?"),
+                    qa("Joan of Arc is associated with this country.", "What is France?"),
+                ],
+                1000: [
+                    qa("This dynasty built much of the Great Wall of China as commonly seen today.", "What is the Ming Dynasty?"),
+                    qa("The French Revolution began in this year.", "What is 1789?"),
+                ],
+            },
+            "Video Games": {
+                200: [
+                    qa("Nintendo's mustachioed mascot who often rescues Princess Peach.", "Who is Mario?"),
+                    qa("This Mojang sandbox game lets players build with blocks and fight the Ender Dragon.", "What is Minecraft?"),
+                ],
+                400: [
+                    qa("Link often wields this legendary blade in The Legend of Zelda.", "What is the Master Sword?"),
+                    qa("The company behind the PlayStation brand.", "What is Sony?"),
+                ],
+                600: [
+                    qa("This 2023 RPG by Larian Studios won many Game of the Year awards.", "What is Baldur's Gate 3?"),
+                    qa("Master Chief is the iconic hero of this Xbox franchise.", "What is Halo?"),
+                ],
+                800: [
+                    qa("This battle royale game from Epic Games is known for building mechanics and seasonal events.", "What is Fortnite?"),
+                    qa("The companion cube appears in this puzzle game series by Valve.", "What is Portal?"),
+                ],
+                1000: [
+                    qa("This company created the Pokémon franchise alongside Game Freak and Creatures.", "What is Nintendo?"),
+                    qa("In Pac-Man, these colored enemies chase the player through a maze.", "What are ghosts?"),
+                ],
+            },
+            "Books & Authors": {
+                200: [
+                    qa("She wrote Pride and Prejudice.", "Who is Jane Austen?"),
+                    qa("This author created Middle-earth and wrote The Hobbit.", "Who is J.R.R. Tolkien?"),
+                ],
+                400: [
+                    qa("In Animal Farm, this pig becomes a dictator-like figure.", "Who is Napoleon?"),
+                    qa("Herman Melville wrote this whaling novel.", "What is Moby-Dick?"),
+                ],
+                600: [
+                    qa("George Orwell also wrote this dystopian novel.", "What is 1984?"),
+                    qa("Odysseus is the hero of this epic poem.", "What is The Odyssey?"),
+                ],
+                800: [
+                    qa("Atticus Finch appears in this Harper Lee novel.", "What is To Kill a Mockingbird?"),
+                    qa("This poet wrote The Raven.", "Who is Edgar Allan Poe?"),
+                ],
+                1000: [
+                    qa("Gabriel García Márquez wrote this novel about the Buendía family.", "What is One Hundred Years of Solitude?"),
+                    qa("Fyodor Dostoevsky wrote this novel featuring Raskolnikov.", "What is Crime and Punishment?"),
+                ],
+            },
+            "Sports": {
+                200: [
+                    qa("This sport uses terms like birdie, eagle, and bogey.", "What is golf?"),
+                    qa("A soccer team has this many players on the field at one time, including the goalkeeper.", "What is 11?"),
+                ],
+                400: [
+                    qa("Michael Jordan played most famously for this NBA team.", "What are the Chicago Bulls?"),
+                    qa("The Stanley Cup is awarded in this sport.", "What is hockey?"),
+                ],
+                600: [
+                    qa("RBI in baseball stands for this.", "What is runs batted in?"),
+                    qa("Wimbledon is associated with this sport.", "What is tennis?"),
+                ],
+                800: [
+                    qa("Muhammad Ali was known by this self-chosen nickname.", "What is The Greatest?"),
+                    qa("Fenway Park is home to this MLB team.", "Who are the Boston Red Sox?"),
+                ],
+                1000: [
+                    qa("A green jacket is awarded to the winner of this tournament.", "What is The Masters?"),
+                    qa("The Tour de France is contested in this sport.", "What is cycling?"),
+                ],
+            },
+            "Hard Science": {
+                200: [
+                    qa("H2O is the chemical formula for this substance.", "What is water?"),
+                    qa("A substance with a pH below 7 is this.", "What is acidic?"),
+                ],
+                400: [
+                    qa("This branch of physics studies heat, work, temperature, and energy transfer.", "What is thermodynamics?"),
+                    qa("This subatomic particle has a negative electric charge.", "What is an electron?"),
+                ],
+                600: [
+                    qa("This scientist proposed the uncertainty principle.", "Who is Werner Heisenberg?"),
+                    qa("This organelle is often called the powerhouse of the cell.", "What is the mitochondrion?"),
+                ],
+                800: [
+                    qa("Sodium's chemical symbol is this.", "What is Na?"),
+                    qa("This blood cell type helps fight infection.", "What are white blood cells?"),
+                ],
+                1000: [
+                    qa("This scale measures acidity and basicity.", "What is the pH scale?"),
+                    qa("Isaac Newton is associated with these three famous laws.", "What are the laws of motion?"),
+                ],
+            },
+            "2000s-2020s Pop Culture": {
+                200: [
+                    qa("This HBO fantasy series ended in 2019 after eight seasons.", "What is Game of Thrones?"),
+                    qa("Many Marvel heroes reunited in this blockbuster after Infinity War.", "What is Avengers: Endgame?"),
+                ],
+                400: [
+                    qa("This short-form video app exploded globally in the late 2010s and early 2020s.", "What is TikTok?"),
+                    qa("Greta Gerwig directed this 2023 movie based on a famous Mattel doll.", "What is Barbie?"),
+                ],
+                600: [
+                    qa("Kendrick Lamar won a Pulitzer Prize for this album.", "What is DAMN.?"),
+                    qa("This singer's Eras Tour became a huge global phenomenon.", "Who is Taylor Swift?"),
+                ],
+                800: [
+                    qa("Pedro Pascal starred as Joel in this HBO adaptation of a hit video game.", "What is The Last of Us?"),
+                    qa("This sci-fi series on Netflix helped revive Kate Bush's Running Up That Hill.", "What is Stranger Things?"),
+                ],
+                1000: [
+                    qa("This South Korean series about deadly games became a global hit in 2021.", "What is Squid Game?"),
+                    qa("This pop star's album Sour featured songs like drivers license and good 4 u.", "Who is Olivia Rodrigo?"),
+                ],
+            },
+            "Myth & Legend": {
+                200: [
+                    qa("In Greek myth, this hero slew the Minotaur.", "Who is Theseus?"),
+                    qa("This Norse god wields the hammer Mjolnir.", "Who is Thor?"),
+                ],
+                400: [
+                    qa("This Greek king's touch turned things to gold.", "Who is Midas?"),
+                    qa("The winged horse of Greek myth is this.", "Who is Pegasus?"),
+                ],
+                600: [
+                    qa("This river in Greek mythology was crossed by Charon.", "What is the Styx?"),
+                    qa("In Arthurian legend, this sword was drawn from the stone.", "What is Excalibur?"),
+                ],
+                800: [
+                    qa("This creature guards treasure and breathes fire in many legends.", "What is a dragon?"),
+                    qa("Odin belongs to this mythology.", "What is Norse mythology?"),
+                ],
+                1000: [
+                    qa("This city was said to be destroyed after Greek warriors emerged from a wooden horse.", "What is Troy?"),
+                    qa("The Labyrinth was built on this island.", "What is Crete?"),
+                ],
+            },
+            "Animals": {
+                200: [
+                    qa("The largest land animal.", "What is the African elephant?"),
+                    qa("This mammal is the only one capable of powered flight.", "What is a bat?"),
+                ],
+                400: [
+                    qa("A group of lions is called this.", "What is a pride?"),
+                    qa("This animal is famous for building dams.", "What is a beaver?"),
+                ],
+                600: [
+                    qa("The fastest land animal.", "What is the cheetah?"),
+                    qa("A baby sheep is called this.", "What is a lamb?"),
+                ],
+                800: [
+                    qa("The largest species of penguin.", "What is the emperor penguin?"),
+                    qa("This Australian animal has fingerprints so close to humans they can confuse investigators.", "What is a koala?"),
+                ],
+                1000: [
+                    qa("This intelligent marine mammal is known for echolocation.", "What is a dolphin?"),
+                    qa("This bird can rotate its head dramatically and usually hunts at night.", "What is an owl?"),
+                ],
+            },
+            "Math & Logic": {
+                200: [
+                    qa("A triangle with all three sides equal is called this.", "What is an equilateral triangle?"),
+                    qa("This Roman numeral represents 50.", "What is L?"),
+                ],
+                400: [
+                    qa("A data structure that uses FIFO order.", "What is a queue?"),
+                    qa("The result of 12 times 12.", "What is 144?"),
+                ],
+                600: [
+                    qa("In algebra, a value that makes an equation true is often called this.", "What is a solution?"),
+                    qa("A number divisible only by 1 and itself is called this.", "What is a prime number?"),
+                ],
+                800: [
+                    qa("This branch of math studies points, lines, angles, and shapes.", "What is geometry?"),
+                    qa("A statement that is true by definition or assumed as a starting point is often called this.", "What is an axiom?"),
+                ],
+                1000: [
+                    qa("This famous sequence begins 1, 1, 2, 3, 5, 8.", "What is the Fibonacci sequence?"),
+                    qa("In computing and logic, true/false algebra is named for this mathematician.", "Who is George Boole?"),
+                ],
+            },
+        },
+    },
+}
+
+FINAL_BANK = [
     {
-        "category": "Science Basics",
-        "clues": [
-            {"value": 200, "question": "This planet is known as the Red Planet.", "answer": "What is Mars?"},
-            {"value": 400, "question": "Water is made of hydrogen and this other element.", "answer": "What is oxygen?"},
-            {"value": 600, "question": "The force that pulls objects toward Earth is called this.", "answer": "What is gravity?"},
-            {"value": 800, "question": "Plants take in this gas from the air during photosynthesis.", "answer": "What is carbon dioxide?"},
-            {"value": 1000, "question": "On the pH scale, a value below 7 describes a substance with this property.", "answer": "What is acidic?"},
-        ],
+        "category": "Final Jiporady: Pop Culture + Tech",
+        "question": "This 1999 sci-fi film shares its title with a mathematical structure used in computer science and linear algebra.",
+        "answer": "What is The Matrix?",
     },
     {
-        "category": "Space",
-        "clues": [
-            {"value": 200, "question": "This is the star at the center of our solar system.", "answer": "What is the Sun?"},
-            {"value": 400, "question": "Earth's natural satellite is this.", "answer": "What is the Moon?"},
-            {"value": 600, "question": "This planet has the most famous ring system in our solar system.", "answer": "What is Saturn?"},
-            {"value": 800, "question": "The Milky Way is a type of this large star system.", "answer": "What is a galaxy?"},
-            {"value": 1000, "question": "Neil Armstrong became the first person to do this on July 20, 1969.", "answer": "What is walk on the Moon?"},
-        ],
+        "category": "Final Jiporady: World History",
+        "question": "This 1215 document is often described as an early limitation on the power of the English king.",
+        "answer": "What is the Magna Carta?",
     },
     {
-        "category": "World Geography",
-        "clues": [
-            {"value": 200, "question": "This is the largest ocean on Earth.", "answer": "What is the Pacific Ocean?"},
-            {"value": 400, "question": "This desert stretches across much of North Africa.", "answer": "What is the Sahara Desert?"},
-            {"value": 600, "question": "Mount Everest lies in the Himalayas on the border of Nepal and this country.", "answer": "What is China?"},
-            {"value": 800, "question": "This river flows through Egypt and empties into the Mediterranean Sea.", "answer": "What is the Nile River?"},
-            {"value": 1000, "question": "This country is both a continent and a nation.", "answer": "What is Australia?"},
-        ],
+        "category": "Final Jiporady: Literature",
+        "question": "This author created Middle-earth and wrote The Hobbit and The Lord of the Rings.",
+        "answer": "Who is J.R.R. Tolkien?",
     },
     {
-        "category": "U.S. Geography",
-        "clues": [
-            {"value": 200, "question": "This state is known as the Sunshine State.", "answer": "What is Florida?"},
-            {"value": 400, "question": "The Grand Canyon is found in this state.", "answer": "What is Arizona?"},
-            {"value": 600, "question": "This is the longest river in the United States.", "answer": "What is the Missouri River?"},
-            {"value": 800, "question": "This U.S. state has the most people.", "answer": "What is California?"},
-            {"value": 1000, "question": "This mountain range runs along much of the eastern United States.", "answer": "What are the Appalachian Mountains?"},
-        ],
+        "category": "Final Jiporady: Science",
+        "question": "This planet is famous for its prominent ring system and is the second largest in our solar system.",
+        "answer": "What is Saturn?",
     },
     {
-        "category": "World History",
-        "clues": [
-            {"value": 200, "question": "This wall was built in northern China over many dynasties.", "answer": "What is the Great Wall of China?"},
-            {"value": 400, "question": "This empire was ruled by Julius Caesar and Augustus.", "answer": "What is the Roman Empire?"},
-            {"value": 600, "question": "The French Revolution began in this year-famous decade.", "answer": "What are the 1780s?"},
-            {"value": 800, "question": "This ship sank on its maiden voyage in 1912.", "answer": "What is the Titanic?"},
-            {"value": 1000, "question": "This conflict from 1939 to 1945 involved the Allies and Axis powers.", "answer": "What is World War II?"},
-        ],
+        "category": "Final Jiporady: Geography",
+        "question": "This African river flows north and is strongly associated with Egypt.",
+        "answer": "What is the Nile?",
     },
     {
-        "category": "U.S. History",
-        "clues": [
-            {"value": 200, "question": "He was the first president of the United States.", "answer": "Who is George Washington?"},
-            {"value": 400, "question": "This document begins with the words 'We the People.'", "answer": "What is the U.S. Constitution?"},
-            {"value": 600, "question": "The purchase of this territory from France doubled the size of the United States in 1803.", "answer": "What is the Louisiana Purchase?"},
-            {"value": 800, "question": "This civil rights leader gave the 'I Have a Dream' speech in 1963.", "answer": "Who is Martin Luther King Jr.?"},
-            {"value": 1000, "question": "This scandal led to President Richard Nixon's resignation in 1974.", "answer": "What is Watergate?"},
-        ],
-    },
-    {
-        "category": "Literature",
-        "clues": [
-            {"value": 200, "question": "This young wizard attends Hogwarts.", "answer": "Who is Harry Potter?"},
-            {"value": 400, "question": "This novel opens with the line 'Call me Ishmael.'", "answer": "What is Moby-Dick?"},
-            {"value": 600, "question": "George Orwell wrote this dystopian novel set in Airstrip One.", "answer": "What is 1984?"},
-            {"value": 800, "question": "Odysseus is the hero of this ancient Greek epic.", "answer": "What is The Odyssey?"},
-            {"value": 1000, "question": "This Jane Austen novel centers on Elizabeth Bennet and Mr. Darcy.", "answer": "What is Pride and Prejudice?"},
-        ],
-    },
-    {
-        "category": "Famous Authors",
-        "clues": [
-            {"value": 200, "question": "He wrote many plays including Hamlet and Macbeth.", "answer": "Who is William Shakespeare?"},
-            {"value": 400, "question": "She wrote Little Women.", "answer": "Who is Louisa May Alcott?"},
-            {"value": 600, "question": "This horror writer created Dracula.", "answer": "Who is Bram Stoker?"},
-            {"value": 800, "question": "He wrote The Old Man and the Sea and won the Nobel Prize in Literature.", "answer": "Who is Ernest Hemingway?"},
-            {"value": 1000, "question": "This author created Middle-earth.", "answer": "Who is J.R.R. Tolkien?"},
-        ],
-    },
-    {
-        "category": "Movies",
-        "clues": [
-            {"value": 200, "question": "This 1997 blockbuster is about a famous doomed ocean liner.", "answer": "What is Titanic?"},
-            {"value": 400, "question": "In The Wizard of Oz, Dorothy travels to this magical land.", "answer": "What is Oz?"},
-            {"value": 600, "question": "This film franchise features Luke Skywalker and Darth Vader.", "answer": "What is Star Wars?"},
-            {"value": 800, "question": "Pixar's first feature film was this story about living toys.", "answer": "What is Toy Story?"},
-            {"value": 1000, "question": "In Back to the Future, Doc Brown's time machine is built from this car brand.", "answer": "What is a DeLorean?"},
-        ],
-    },
-    {
-        "category": "Television",
-        "clues": [
-            {"value": 200, "question": "This animated family lives in Springfield.", "answer": "Who are the Simpsons?"},
-            {"value": 400, "question": "Ross, Rachel, Monica, Chandler, Joey, and Phoebe star on this sitcom.", "answer": "What is Friends?"},
-            {"value": 600, "question": "The phrase 'Winter is coming' comes from this fantasy series.", "answer": "What is Game of Thrones?"},
-            {"value": 800, "question": "This long-running British sci-fi show features the TARDIS.", "answer": "What is Doctor Who?"},
-            {"value": 1000, "question": "Walter White teaches chemistry before turning to crime in this series.", "answer": "What is Breaking Bad?"},
-        ],
-    },
-    {
-        "category": "Music",
-        "clues": [
-            {"value": 200, "question": "This instrument has 88 keys on a standard model.", "answer": "What is the piano?"},
-            {"value": 400, "question": "The Beatles were formed in this English city.", "answer": "What is Liverpool?"},
-            {"value": 600, "question": "This singer is known as the 'King of Pop.'", "answer": "Who is Michael Jackson?"},
-            {"value": 800, "question": "A group of three musicians is called this.", "answer": "What is a trio?"},
-            {"value": 1000, "question": "Beethoven's Ninth Symphony includes this famous choral movement.", "answer": "What is 'Ode to Joy'?"},
-        ],
-    },
-    {
-        "category": "Technology",
-        "clues": [
-            {"value": 200, "question": "CPU stands for Central Processing this.", "answer": "What is Unit?"},
-            {"value": 400, "question": "This company created the Windows operating system.", "answer": "What is Microsoft?"},
-            {"value": 600, "question": "A small picture used to launch an app is commonly called this.", "answer": "What is an icon?"},
-            {"value": 800, "question": "This piece of hardware stores data long-term in many computers.", "answer": "What is a hard drive?"},
-            {"value": 1000, "question": "HTML is mainly used to structure this kind of document.", "answer": "What is a web page?"},
-        ],
-    },
-    {
-        "category": "Internet & Computing",
-        "clues": [
-            {"value": 200, "question": "The 'www' in a web address stands for World Wide this.", "answer": "What is Web?"},
-            {"value": 400, "question": "This symbol appears in every email address.", "answer": "What is the @ symbol?"},
-            {"value": 600, "question": "A malicious program that spreads between computers can be called this.", "answer": "What is a virus?"},
-            {"value": 800, "question": "This popular version-control system is used by many software developers.", "answer": "What is Git?"},
-            {"value": 1000, "question": "RAM is prized because it allows this kind of access to data.", "answer": "What is fast temporary access?"},
-        ],
-    },
-    {
-        "category": "Sports",
-        "clues": [
-            {"value": 200, "question": "This sport is played at Wimbledon.", "answer": "What is tennis?"},
-            {"value": 400, "question": "A baseball game typically lasts this many innings.", "answer": "What is nine?"},
-            {"value": 600, "question": "The Olympics are held every this many years.", "answer": "What is four?"},
-            {"value": 800, "question": "In soccer, players try to score in this part of the field setup.", "answer": "What is the goal?"},
-            {"value": 1000, "question": "This sport uses terms like birdie, eagle, and bogey.", "answer": "What is golf?"},
-        ],
-    },
-    {
-        "category": "Food & Drink",
-        "clues": [
-            {"value": 200, "question": "Sushi is most closely associated with this country.", "answer": "What is Japan?"},
-            {"value": 400, "question": "Guacamole is made primarily from this fruit.", "answer": "What is avocado?"},
-            {"value": 600, "question": "Espresso is a concentrated form of this beverage.", "answer": "What is coffee?"},
-            {"value": 800, "question": "Mozzarella is a cheese often paired with tomato and basil in this salad.", "answer": "What is caprese salad?"},
-            {"value": 1000, "question": "This French pastry is famous for its crescent shape.", "answer": "What is a croissant?"},
-        ],
-    },
-    {
-        "category": "Nature & Animals",
-        "clues": [
-            {"value": 200, "question": "This mammal is known for its black-and-white stripes.", "answer": "What is a zebra?"},
-            {"value": 400, "question": "A baby frog begins life in this form.", "answer": "What is a tadpole?"},
-            {"value": 600, "question": "This is the fastest land animal.", "answer": "What is a cheetah?"},
-            {"value": 800, "question": "A group of wolves is called this.", "answer": "What is a pack?"},
-            {"value": 1000, "question": "These huge trees are famous for growing in California's Sierra Nevada.", "answer": "What are giant sequoias?"},
-        ],
-    },
-    {
-        "category": "Art & Architecture",
-        "clues": [
-            {"value": 200, "question": "Leonardo da Vinci painted this famous smiling woman.", "answer": "What is the Mona Lisa?"},
-            {"value": 400, "question": "The Eiffel Tower stands in this city.", "answer": "What is Paris?"},
-            {"value": 600, "question": "This artist cut off part of his ear.", "answer": "Who is Vincent van Gogh?"},
-            {"value": 800, "question": "A building's detailed drawing made before construction is called this.", "answer": "What is a blueprint?"},
-            {"value": 1000, "question": "This famous domed basilica overlooks Vatican City.", "answer": "What is St. Peter's Basilica?"},
-        ],
-    },
-    {
-        "category": "Mythology",
-        "clues": [
-            {"value": 200, "question": "In Greek myth, this king of the gods wields thunderbolts.", "answer": "Who is Zeus?"},
-            {"value": 400, "question": "This winged horse sprang from Medusa's blood.", "answer": "Who is Pegasus?"},
-            {"value": 600, "question": "In Norse mythology, this god carries the hammer Mjolnir.", "answer": "Who is Thor?"},
-            {"value": 800, "question": "This Greek hero completed twelve famous labors.", "answer": "Who is Heracles?"},
-            {"value": 1000, "question": "In Egyptian mythology, this god of the dead is often depicted with a jackal head.", "answer": "Who is Anubis?"},
-        ],
-    },
-    {
-        "category": "Word Origins",
-        "clues": [
-            {"value": 200, "question": "A word with the opposite meaning of another word is called this.", "answer": "What is an antonym?"},
-            {"value": 400, "question": "A word that sounds like what it describes, like 'buzz,' is this.", "answer": "What is onomatopoeia?"},
-            {"value": 600, "question": "A dictionary is organized alphabetically by these units of language.", "answer": "What are words?"},
-            {"value": 800, "question": "The root 'bio-' relates to this.", "answer": "What is life?"},
-            {"value": 1000, "question": "When a brand name becomes a generic term in everyday speech, that's commonly called this kind of shift.", "answer": "What is genericization?"},
-        ],
-    },
-    {
-        "category": "Math & Logic",
-        "clues": [
-            {"value": 200, "question": "This is the result of 9 times 9.", "answer": "What is 81?"},
-            {"value": 400, "question": "A triangle with all three sides equal is called this.", "answer": "What is an equilateral triangle?"},
-            {"value": 600, "question": "The Roman numeral X represents this number.", "answer": "What is 10?"},
-            {"value": 800, "question": "A six-sided polygon is called this.", "answer": "What is a hexagon?"},
-            {"value": 1000, "question": "In a standard deck of cards, the probability of drawing a king from a full shuffled deck is this fraction.", "answer": "What is 1/13?"},
-        ],
-    },
-    {
-        "category": "Inventions",
-        "clues": [
-            {"value": 200, "question": "This invention tells time using hands or digits.", "answer": "What is a clock?"},
-            {"value": 400, "question": "The brothers Orville and Wilbur Wright are associated with this invention.", "answer": "What is the airplane?"},
-            {"value": 600, "question": "Johannes Gutenberg is famous for improving this machine.", "answer": "What is the printing press?"},
-            {"value": 800, "question": "This inventor is strongly associated with the practical incandescent light bulb.", "answer": "Who is Thomas Edison?"},
-            {"value": 1000, "question": "The World Wide Web was invented by this British computer scientist.", "answer": "Who is Tim Berners-Lee?"},
-        ],
-    },
-    {
-        "category": "Famous People",
-        "clues": [
-            {"value": 200, "question": "He developed the theory of relativity.", "answer": "Who is Albert Einstein?"},
-            {"value": 400, "question": "She was the first woman to win a Nobel Prize.", "answer": "Who is Marie Curie?"},
-            {"value": 600, "question": "He was a South African leader imprisoned for 27 years before becoming president.", "answer": "Who is Nelson Mandela?"},
-            {"value": 800, "question": "This aviation pioneer disappeared over the Pacific in 1937.", "answer": "Who is Amelia Earhart?"},
-            {"value": 1000, "question": "This naturalist wrote On the Origin of Species.", "answer": "Who is Charles Darwin?"},
-        ],
-    },
-    {
-        "category": "Business & Brands",
-        "clues": [
-            {"value": 200, "question": "This company is famous for its golden arches.", "answer": "What is McDonald's?"},
-            {"value": 400, "question": "This online retailer started as an internet bookstore.", "answer": "What is Amazon?"},
-            {"value": 600, "question": "This athletic brand uses the slogan 'Just Do It.'", "answer": "What is Nike?"},
-            {"value": 800, "question": "This soft drink brand shares its name with a major cola company.", "answer": "What is Coca-Cola?"},
-            {"value": 1000, "question": "This electric-car company was co-founded by Martin Eberhard and Marc Tarpenning.", "answer": "What is Tesla?"},
-        ],
-    },
-    {
-        "category": "Ireland",
-        "clues": [
-            {"value": 200, "question": "This is the capital city of Ireland.", "answer": "What is Dublin?"},
-            {"value": 400, "question": "The Irish tricolor includes green, white, and this third color.", "answer": "What is orange?"},
-            {"value": 600, "question": "This Irish holiday is celebrated worldwide on March 17.", "answer": "What is St. Patrick's Day?"},
-            {"value": 800, "question": "This famous stone at Blarney Castle is said to grant the gift of eloquence.", "answer": "What is the Blarney Stone?"},
-            {"value": 1000, "question": "This river flows through Dublin and into Dublin Bay.", "answer": "What is the River Liffey?"},
-        ],
-    },
-    {
-        "category": "Capitals",
-        "clues": [
-            {"value": 200, "question": "The capital of France is this city.", "answer": "What is Paris?"},
-            {"value": 400, "question": "The capital of Japan is this city.", "answer": "What is Tokyo?"},
-            {"value": 600, "question": "The capital of Canada is this city.", "answer": "What is Ottawa?"},
-            {"value": 800, "question": "The capital of Brazil is this planned city.", "answer": "What is Brasília?"},
-            {"value": 1000, "question": "The capital of South Korea is this city.", "answer": "What is Seoul?"},
-        ],
-    },
-    {
-        "category": "Human Body",
-        "clues": [
-            {"value": 200, "question": "This organ pumps blood through the body.", "answer": "What is the heart?"},
-            {"value": 400, "question": "Humans normally have this many lungs.", "answer": "What is two?"},
-            {"value": 600, "question": "The femur is a bone found in this part of the body.", "answer": "What is the leg?"},
-            {"value": 800, "question": "This organ helps filter blood and produce urine.", "answer": "What are the kidneys?"},
-            {"value": 1000, "question": "The smallest bones in the body are found in this sensory organ.", "answer": "What is the ear?"},
-        ],
-    },
-    {
-        "category": "Oceans & Earth",
-        "clues": [
-            {"value": 200, "question": "This layer of Earth is the one we live on.", "answer": "What is the crust?"},
-            {"value": 400, "question": "Molten rock below Earth's surface is called this.", "answer": "What is magma?"},
-            {"value": 600, "question": "This imaginary line circles Earth halfway between the poles.", "answer": "What is the equator?"},
-            {"value": 800, "question": "The Atlantic Ocean lies between the Americas and these two continents.", "answer": "What are Europe and Africa?"},
-            {"value": 1000, "question": "This instrument is used to measure atmospheric pressure.", "answer": "What is a barometer?"},
-        ],
-    },
-    {
-        "category": "Everyday Objects",
-        "clues": [
-            {"value": 200, "question": "You use this object to unlock many doors.", "answer": "What is a key?"},
-            {"value": 400, "question": "This household item is used to illuminate a room by hanging from or standing in it.", "answer": "What is a lamp?"},
-            {"value": 600, "question": "This tool has teeth and is used to style hair.", "answer": "What is a comb?"},
-            {"value": 800, "question": "You might mail a letter in this paper container.", "answer": "What is an envelope?"},
-            {"value": 1000, "question": "This kitchen item measures ingredients and often comes in sets.", "answer": "What are measuring cups?"},
-        ],
-    },
-    {
-        "category": "Games & Toys",
-        "clues": [
-            {"value": 200, "question": "This board game asks players to buy properties like Boardwalk.", "answer": "What is Monopoly?"},
-            {"value": 400, "question": "In chess, this piece moves in an L-shape.", "answer": "What is the knight?"},
-            {"value": 600, "question": "This colorful puzzle cube was invented by Ernő Rubik.", "answer": "What is the Rubik's Cube?"},
-            {"value": 800, "question": "Nintendo's plumber hero is this character.", "answer": "Who is Mario?"},
-            {"value": 1000, "question": "In playing cards, these are the four suits.", "answer": "What are hearts, diamonds, clubs, and spades?"},
-        ],
-    },
-    {
-        "category": "Potpourri",
-        "clues": [
-            {"value": 200, "question": "This weekday comes right before Saturday.", "answer": "What is Friday?"},
-            {"value": 400, "question": "A century contains this many years.", "answer": "What is 100?"},
-            {"value": 600, "question": "This colorful arc can appear in the sky after rain.", "answer": "What is a rainbow?"},
-            {"value": 800, "question": "This is the freezing point of water in degrees Celsius.", "answer": "What is 0?"},
-            {"value": 1000, "question": "This famous detective created by Arthur Conan Doyle lives at 221B Baker Street.", "answer": "Who is Sherlock Holmes?"},
-        ],
+        "category": "Final Jiporady: Computing",
+        "question": "This system translates domain names like example.com into numeric network addresses.",
+        "answer": "What is DNS?",
     },
 ]
-
-
-def build_board(category_count: int = 6) -> list[dict[str, Any]]:
-    """Return a randomized set of categories for the board."""
-    category_count = max(4, min(category_count, len(QUESTION_BANK)))
-    selected = random.sample(QUESTION_BANK, k=category_count)
-    board = []
-    for item in selected:
-        clues = sorted(item["clues"], key=lambda clue: clue["value"])
-        board.append({"category": item["category"], "clues": clues})
-    return board
-
-
-def get_bank_stats() -> dict[str, int]:
-    total_categories = len(QUESTION_BANK)
-    total_clues = sum(len(item["clues"]) for item in QUESTION_BANK)
-    return {"total_categories": total_categories, "total_clues": total_clues}

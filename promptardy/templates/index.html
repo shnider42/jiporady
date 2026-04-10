@@ -1,59 +1,87 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="hero">
+            <div>
+                <p class="eyebrow">Render-ready Flask app</p>
+                <h1>{{ title }}</h1>
+                <p class="subtitle">{{ subtitle }}</p>
+            </div>
+            <div class="score-panel">
+                <div class="score-box">
+                    <span class="score-label">Score</span>
+                    <span id="score" class="score-value">$0</span>
+                </div>
+                <div class="score-box slim">
+                    <span class="score-label">Solved</span>
+                    <span id="progress" class="score-value small">0 / 60</span>
+                </div>
+            </div>
+        </header>
 
-{% block title %}Promptardy! | Jeopardy-Style Trivia Board{% endblock %}
+        <section class="controls">
+            <div class="left-controls">
+                <button id="round1Btn" class="control-btn active">Round 1</button>
+                <button id="round2Btn" class="control-btn">Double Jiporady</button>
+                <button id="finalBtn" class="control-btn accent">Final</button>
+            </div>
+            <div class="right-controls">
+                <button id="newGameBtn" class="control-btn warning">New Game</button>
+                <button id="clearStorageBtn" class="control-btn subtle">Hard Reset</button>
+            </div>
+        </section>
 
-{% block content %}
-<div class="page-shell">
-    <header class="hero">
-        <div>
-            <p class="eyebrow">Jeopardy-style trivia game</p>
-            <h1>Promptardy!</h1>
-            <p class="tagline">
-                A fast, presentable trivia board you can deploy to Render and click through live.
-            </p>
-        </div>
+        <section class="tips">
+            <span>Click any clue to reveal it.</span>
+            <span>Use <strong>Show Answer</strong>, then mark it <strong>Correct</strong> or <strong>Incorrect</strong>.</span>
+            <span>Your score is saved in the browser per board.</span>
+        </section>
 
-        <div class="control-panel">
-            <div class="stat-pill">{{ stats.total_categories }} categories loaded</div>
-            <div class="stat-pill">{{ stats.total_clues }} clues ready</div>
+        <main>
+            <div id="board" class="board"></div>
 
-            <label for="categoryCount">Board width</label>
-            <select id="categoryCount" aria-label="Board width">
-                {% for option in [4, 5, 6, 7, 8, 9, 10] %}
-                <option value="{{ option }}" {% if option == category_count %}selected{% endif %}>{{ option }} categories</option>
-                {% endfor %}
-            </select>
+            <section id="finalSection" class="final-section hidden">
+                <h2>Final Jiporady</h2>
+                <div class="final-card">
+                    <p class="final-category" id="finalCategory"></p>
+                    <p class="final-question" id="finalQuestion"></p>
+                    <div class="final-actions">
+                        <button id="showFinalAnswerBtn" class="control-btn accent">Show Final Answer</button>
+                        <p id="finalAnswer" class="final-answer hidden"></p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
-            <div class="button-row">
-                <button id="newBoardBtn" class="action-btn">New Board</button>
-                <button id="resetUsedBtn" class="action-btn action-btn-secondary">Reset Used Clues</button>
+    <div id="clueModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalCategory">
+        <div class="modal-card">
+            <button id="closeModalBtn" class="close-btn" aria-label="Close">×</button>
+            <p id="modalCategory" class="modal-category"></p>
+            <p id="modalValue" class="modal-value"></p>
+            <p id="modalQuestion" class="modal-question"></p>
+            <div id="answerWrapper" class="answer-wrapper hidden">
+                <p class="answer-label">Answer</p>
+                <p id="modalAnswer" class="modal-answer"></p>
+            </div>
+            <div class="modal-actions">
+                <button id="showAnswerBtn" class="control-btn accent">Show Answer</button>
+                <button id="correctBtn" class="control-btn success">Correct</button>
+                <button id="incorrectBtn" class="control-btn danger">Incorrect</button>
             </div>
         </div>
-    </header>
-
-    <section class="board-wrapper">
-        <div class="board-note">
-            Click a clue to reveal it. Click “Show Answer” to flip. Close it and the clue is marked used.
-        </div>
-        <div id="board" class="board" aria-live="polite"></div>
-    </section>
-</div>
-
-<div id="clueModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalCategory">
-    <div class="modal-card">
-        <button id="closeModalBtn" class="modal-close" aria-label="Close clue">×</button>
-        <p id="modalCategory" class="modal-category"></p>
-        <p id="modalValue" class="modal-value"></p>
-        <div class="modal-body">
-            <p id="modalPrompt" class="modal-prompt"></p>
-            <p id="modalAnswer" class="modal-answer hidden"></p>
-        </div>
-        <div class="modal-actions">
-            <button id="showAnswerBtn" class="action-btn">Show Answer</button>
-            <button id="markUsedBtn" class="action-btn action-btn-secondary">Close Clue</button>
-        </div>
     </div>
-</div>
 
-<script id="initialBoardData" type="application/json">{{ initial_board|tojson }}</script>
-{% endblock %}
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
