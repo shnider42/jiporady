@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4de38b69-9ba5-4320-a24a-61c62a96938a" name="Changes" comment="back to regular">
+    <list default="true" id="4de38b69-9ba5-4320-a24a-61c62a96938a" name="Changes" comment="rocket league RLCS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/promptardy/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/promptardy/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/promptardy/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,14 +82,41 @@
       <option name="project" value="LOCAL" />
       <updated>1775841643274</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="new rocket league">
+      <option name="closed" value="true" />
+      <created>1775853631808</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1775853631808</updated>
+    </task>
+    <task id="LOCAL-00005" summary="next next rocket league">
+      <option name="closed" value="true" />
+      <created>1775856482605</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1775856482605</updated>
+    </task>
+    <task id="LOCAL-00006" summary="rocket league RLCS">
+      <option name="closed" value="true" />
+      <created>1775858023974</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1775858023974</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="rocket league" />
     <MESSAGE value="rocket league attempt 2" />
     <MESSAGE value="back to regular" />
-    <option name="LAST_COMMIT_MESSAGE" value="back to regular" />
+    <MESSAGE value="new rocket league" />
+    <MESSAGE value="next next rocket league" />
+    <MESSAGE value="rocket league RLCS" />
+    <option name="LAST_COMMIT_MESSAGE" value="rocket league RLCS" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
