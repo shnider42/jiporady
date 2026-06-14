@@ -13,26 +13,45 @@ A beefed-up Flask version of the Jeopardy-style game, ready to deploy on Render.
 ## Topic modules
 Topic modules follow the `app_<topic>.py` filename pattern and are loaded by `app_loader.py`.
 
-For the Honey Bees game added here:
+Available topic modules include:
+
+- `nfl` -> `app_nfl.py`
+- `honey_bees` -> `app_honey_bees.py`
+
+For the NFL game:
 
 ```bash
-JIPORADY_TOPIC=honey_bees python app_loader.py
+JIPORADY_TOPIC=nfl python app_loader.py
 ```
 
 On Windows PowerShell:
 
 ```powershell
-$env:JIPORADY_TOPIC = "honey_bees"
+$env:JIPORADY_TOPIC = "nfl"
 python app_loader.py
 ```
 
 You can also select the module explicitly:
 
 ```bash
-JIPORADY_APP_MODULE=app_honey_bees python app_loader.py
+JIPORADY_APP_MODULE=app_nfl python app_loader.py
+```
+
+Or run the module directly:
+
+```bash
+python app_nfl.py
 ```
 
 Then open `http://127.0.0.1:5000`.
+
+If port 5000 is already busy, set a different port first:
+
+```powershell
+$env:PORT = "5001"
+$env:JIPORADY_TOPIC = "nfl"
+python app_loader.py
+```
 
 ## Deploy on Render
 1. Push these files to the repo.
@@ -40,11 +59,12 @@ Then open `http://127.0.0.1:5000`.
 3. Render should detect `render.yaml`, or you can use:
    - Build Command: `pip install -r requirements.txt`
    - Start Command: `gunicorn app_loader:app`
-   - Environment variable: `JIPORADY_TOPIC=honey_bees`
+   - Environment variable: `JIPORADY_TOPIC=nfl`
 4. Deploy.
 
 ## Files
 - `app_loader.py` - topic-aware Flask entrypoint
+- `app_nfl.py` - NFL question bank and Flask routes
 - `app_honey_bees.py` - Honey Bees question bank and Flask routes
 - `app_*.py` - other topic-specific game modules
 - `templates/index.html` - main UI
