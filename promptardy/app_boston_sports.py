@@ -85,7 +85,7 @@ GAME_DATA = {
                         {"value": 400, "question": "This Red Sox catcher waved his 12th-inning Game 6 drive fair in the 1975 World Series.", "answer": "Who is Carlton Fisk?"},
                         {"value": 600, "question": "This Celtics center and 1973 NBA MVP powered Boston's 1974 and 1976 championship teams.", "answer": "Who is Dave Cowens?"},
                         {"value": 800, "question": "In 1971, the Boston Patriots adopted this regional name as they moved into Foxborough.", "answer": "Who are the New England Patriots?"},
-                        {"value": 1000, "question": "This Reds left fielder slammed into the Fenway wall in the 1975 World Series while chasing Fred Lynn's drive.", "answer": "Who is George Foster?"},
+                        {"value": 1000, "question": "Before Fisk's famous homer, this Red Sox pinch hitter tied Game 6 of the 1975 World Series with an eighth-inning three-run shot.", "answer": "Who is Bernie Carbo?"},
                     ],
                 },
                 {
@@ -101,11 +101,11 @@ GAME_DATA = {
                 {
                     "title": "Fenway Fine Print",
                     "clues": [
-                        {"value": 200, "question": "This former Red Sox owner purchased Babe Ruth's contract and later gave Fenway its famous left-field wall height.", "answer": "Who is Tom Yawkey?"},
+                        {"value": 200, "question": "This former Red Sox owner sold Babe Ruth's contract to the Yankees after the 1919 season.", "answer": "Who is Harry Frazee?"},
                         {"value": 400, "question": "The lone red seat in Fenway's right-field bleachers commemorates this hitter's 502-foot home run.", "answer": "Who is Ted Williams?"},
                         {"value": 600, "question": "This Red Sox pitcher won both the 1967 AL Cy Young and AL MVP awards during the Impossible Dream season.", "answer": "Who is Jim Lonborg?"},
-                        {"value": 800, "question": "This left-field line area at Fenway was named for a groundskeeper and became a quirky double-producing corner.", "answer": "What is Duffy's Cliff?"},
-                        {"value": 1000, "question": "Before the Green Monster seats were added, this hand-operated feature lived inside Fenway's left-field wall.", "answer": "What is the manual scoreboard?"},
+                        {"value": 800, "question": "This old left-field incline at Fenway was named after Red Sox outfielder Duffy Lewis.", "answer": "What is Duffy's Cliff?"},
+                        {"value": 1000, "question": "This hand-operated feature still lives inside Fenway's left-field wall.", "answer": "What is the manual scoreboard?"},
                     ],
                 },
                 {
