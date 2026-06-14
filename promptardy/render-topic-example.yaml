@@ -9,8 +9,8 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: JIPORADY_TOPIC
-        value: nfl
+        value: boston_sports
 
 # Alternative:
 # - key: JIPORADY_APP_MODULE
-#   value: app_nfl
+#   value: app_boston_sports
