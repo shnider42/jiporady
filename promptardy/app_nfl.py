@@ -135,7 +135,7 @@ GAME_DATA = {
                         {"value": 400, "question": "Minnesota's late-1960s and 1970s defensive line wore this royal, people-eating nickname.", "answer": "What are the Purple People Eaters?"},
                         {"value": 600, "question": "The Rams' Deacon Jones-era defensive line shared this intimidating four-man nickname.", "answer": "What is the Fearsome Foursome?"},
                         {"value": 800, "question": "Denver's 1977 Super Bowl defense became known by this citrus-colored nickname.", "answer": "What is the Orange Crush?"},
-                        {"value": 1000, "question": "The Jets' late-1960s defensive line of Verlon Biggs, Gerry Philbin, Paul Rochester, and John Elliott used this exchange-themed nickname.", "answer": "What is the New York Sack Exchange?"},
+                        {"value": 1000, "question": "The Jets' early-1980s defensive line of Mark Gastineau, Joe Klecko, Marty Lyons, and Abdul Salaam used this exchange-themed nickname.", "answer": "What is the New York Sack Exchange?"},
                     ],
                 },
             ],
