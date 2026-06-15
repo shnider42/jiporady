@@ -115,7 +115,7 @@ GAME_DATA = {
                         {"value": 400, "question": "This coach led Showtime Lakers teams to four championships in the 1980s.", "answer": "Who is Pat Riley?"},
                         {"value": 600, "question": "Dennis Rodman joined the Bulls before this season, helping launch the second three-peat.", "answer": "What is 1995-96?"},
                         {"value": 800, "question": "The Bad Boys Pistons won back-to-back titles in these two years.", "answer": "What are 1989 and 1990?"},
-                        {"value": 1000, "question": "This Spurs role player won rings with Tim Duncan in 1999, 2003, 2005, and 2007, then returned as a respected assistant coach.", "answer": "Who is Avery Johnson?"},
+                        {"value": 1000, "question": "This clutch forward won championships with the Rockets, Lakers, and Spurs and earned the nickname Big Shot Bob.", "answer": "Who is Robert Horry?"},
                     ],
                 },
                 {
@@ -125,7 +125,7 @@ GAME_DATA = {
                         {"value": 400, "question": "This Orlando Magic guard set the single-game assist record with 30 in 1990.", "answer": "Who is Scott Skiles?"},
                         {"value": 600, "question": "This Laker set the NBA single-game blocked shots record with 17 in 1973.", "answer": "Who is Elmore Smith?"},
                         {"value": 800, "question": "In 1961-62, Wilt Chamberlain averaged this impossible-looking number of minutes per game.", "answer": "What is 48.5 minutes per game?"},
-                        {"value": 1000, "question": "This Detroit Piston scored 13 points in the final 33 seconds of a 2004 game against New Jersey.", "answer": "Who is Tayshaun Prince?"},
+                        {"value": 1000, "question": "This Rockets guard scored 13 points in the final 33 seconds of a 2004 game against San Antonio.", "answer": "Who is Tracy McGrady?"},
                     ],
                 },
                 {
