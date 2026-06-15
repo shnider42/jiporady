@@ -9,8 +9,8 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: JIPORADY_TOPIC
-        value: nba
+        value: nfl_since_2000
 
 # Alternative:
 # - key: JIPORADY_APP_MODULE
-#   value: app_nba
+#   value: app_nfl_since_2000
