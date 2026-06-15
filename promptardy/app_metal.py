@@ -50,7 +50,7 @@ GAME_DATA = {
                         {"value": 200, "question": "This Pantera ballad begins with clean guitar and a cemetery-referencing title.", "answer": "What is Cemetery Gates?"},
                         {"value": 300, "question": "Avenged Sevenfold's breakthrough single about bats shares imagery with Hunter S. Thompson territory.", "answer": "What is Bat Country?"},
                         {"value": 400, "question": "This A7X song from 'City of Evil' names a Biblical-sounding city but opens with a huge dual-guitar attack.", "answer": "What is Beast and the Harlot?"},
-                        {"value": 500, "question": "This Pantera song's title asks you to become new again, even though fans usually chant the one-word hook.", "answer": "What is I'm Broken?"},
+                        {"value": 500, "question": "This Pantera song from 'Far Beyond Driven' bluntly declares damage in its two-word title.", "answer": "What is I'm Broken?"},
                     ],
                 },
                 {
