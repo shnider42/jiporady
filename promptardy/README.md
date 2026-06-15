@@ -15,34 +15,36 @@ Topic modules follow the `app_<topic>.py` filename pattern and are loaded by `ap
 
 Available topic modules include:
 
+- `nba` -> `app_nba.py`
+- `metal` -> `app_metal.py`
 - `music_theory` -> `app_music_theory.py`
 - `boston_sports` -> `app_boston_sports.py`
 - `nfl` -> `app_nfl.py`
 - `honey_bees` -> `app_honey_bees.py`
 
-For the music theory game:
+For the NBA game:
 
 ```bash
-JIPORADY_TOPIC=music_theory python app_loader.py
+JIPORADY_TOPIC=nba python app_loader.py
 ```
 
 On Windows PowerShell:
 
 ```powershell
-$env:JIPORADY_TOPIC = "music_theory"
+$env:JIPORADY_TOPIC = "nba"
 python app_loader.py
 ```
 
 You can also select the module explicitly:
 
 ```bash
-JIPORADY_APP_MODULE=app_music_theory python app_loader.py
+JIPORADY_APP_MODULE=app_nba python app_loader.py
 ```
 
 Or run the module directly:
 
 ```bash
-python app_music_theory.py
+python app_nba.py
 ```
 
 Then open `http://127.0.0.1:5000`.
@@ -50,8 +52,8 @@ Then open `http://127.0.0.1:5000`.
 If port 5000 is already busy, set a different port first:
 
 ```powershell
-$env:PORT = "5003"
-$env:JIPORADY_TOPIC = "music_theory"
+$env:PORT = "5005"
+$env:JIPORADY_TOPIC = "nba"
 python app_loader.py
 ```
 
@@ -61,11 +63,13 @@ python app_loader.py
 3. Render should detect `render.yaml`, or you can use:
    - Build Command: `pip install -r requirements.txt`
    - Start Command: `gunicorn app_loader:app`
-   - Environment variable: `JIPORADY_TOPIC=music_theory`
+   - Environment variable: `JIPORADY_TOPIC=nba`
 4. Deploy.
 
 ## Files
 - `app_loader.py` - topic-aware Flask entrypoint
+- `app_nba.py` - NBA question bank and Flask routes
+- `app_metal.py` - Metal question bank and Flask routes
 - `app_music_theory.py` - Music theory question bank and Flask routes
 - `app_boston_sports.py` - Boston pro sports question bank and Flask routes
 - `app_nfl.py` - NFL question bank and Flask routes
