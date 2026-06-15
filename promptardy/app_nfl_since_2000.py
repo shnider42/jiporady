@@ -134,7 +134,7 @@ GAME_DATA = {
                         {"value": 200, "question": "This Bills quarterback jumped over defenders and eventually became one half of the Mahomes-Allen playoff rivalry.", "answer": "Who is Josh Allen?"},
                         {"value": 400, "question": "This Titans running back's stiff-arm highlights and 2,000-yard season made him a modern power-back throwback.", "answer": "Who is Derrick Henry?"},
                         {"value": 600, "question": "This Bengals quarterback helped Cincinnati reach Super Bowl LVI after being drafted first overall in 2020.", "answer": "Who is Joe Burrow?"},
-                        {"value": 800, "question": "This Raiders kicker made three game-winning kicks in the 2021 season finale to send Las Vegas to the playoffs.", "answer": "Who is Daniel Carlson?"},
+                        {"value": 800, "question": "This Raiders kicker hit the overtime field goal against the Chargers in the 2021 regular-season finale to send Las Vegas to the playoffs.", "answer": "Who is Daniel Carlson?"},
                         {"value": 1000, "question": "This 2008 Dolphins formation briefly turned Ronnie Brown into a left-handed touchdown machine and revived an old-school concept.", "answer": "What is the Wildcat?"},
                     ],
                 },
