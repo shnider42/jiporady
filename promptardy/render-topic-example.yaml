@@ -9,8 +9,8 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: JIPORADY_TOPIC
-        value: boston_sports
+        value: music_theory
 
 # Alternative:
 # - key: JIPORADY_APP_MODULE
-#   value: app_boston_sports
+#   value: app_music_theory
