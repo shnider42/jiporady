@@ -9,8 +9,8 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: JIPORADY_TOPIC
-        value: music_theory
+        value: metal
 
 # Alternative:
 # - key: JIPORADY_APP_MODULE
-#   value: app_music_theory
+#   value: app_metal
