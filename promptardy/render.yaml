@@ -9,4 +9,4 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: JIPORADY_TOPIC
-        value: music_theory
+        value: nba
