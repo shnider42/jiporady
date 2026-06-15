@@ -9,8 +9,8 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: JIPORADY_TOPIC
-        value: metal
+        value: nba
 
 # Alternative:
 # - key: JIPORADY_APP_MODULE
-#   value: app_metal
+#   value: app_nba
