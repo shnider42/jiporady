@@ -111,7 +111,7 @@ GAME_DATA = {
                 {
                     "title": "Chromatic Harmony",
                     "clues": [
-                        {"value": 200, "question": "This predominant chord has scale degree flat 6 in the bass and often moves to V.", "answer": "What is a Neapolitan sixth chord?"},
+                        {"value": 200, "question": "This predominant chord is a major chord built on lowered scale degree 2 and is usually heard in first inversion before V.", "answer": "What is a Neapolitan sixth chord?"},
                         {"value": 400, "question": "Italian, French, and German varieties of this chord family usually contain scale degrees flat 6 and sharp 4.", "answer": "What are augmented sixth chords?"},
                         {"value": 600, "question": "A fully diminished seventh chord built on the raised fourth scale degree can function as this secondary leading-tone chord to V.", "answer": "What is vii°7/V?"},
                         {"value": 800, "question": "In common-practice harmony, a German augmented sixth can resemble this dominant seventh chord by enharmonic spelling.", "answer": "What is V7?"},
