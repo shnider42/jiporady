@@ -9,8 +9,8 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: JIPORADY_TOPIC
-        value: nfl_since_2000
+        value: brazil_soccer
 
 # Alternative:
 # - key: JIPORADY_APP_MODULE
-#   value: app_nfl_since_2000
+#   value: app_brazil_soccer
