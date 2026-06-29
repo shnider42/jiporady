@@ -23,6 +23,7 @@ Available topic modules include:
 - `boston_sports` -> `app_boston_sports.py`
 - `nfl` -> `app_nfl.py`
 - `honey_bees` -> `app_honey_bees.py`
+- `polish_history` -> `app_polish_history.py`
 
 For the Brazilian international soccer game:
 
@@ -78,6 +79,7 @@ python app_loader.py
 - `app_boston_sports.py` - Boston pro sports question bank and Flask routes
 - `app_nfl.py` - NFL question bank and Flask routes
 - `app_honey_bees.py` - Honey Bees question bank and Flask routes
+- `app_polish_history.py` - Polish history question bank with English Round 1 and Polish Double Jiporady routes
 - `app_*.py` - other topic-specific game modules
 - `templates/index.html` - main UI
 - `static/js/game.js` - gameplay logic and scorekeeping
