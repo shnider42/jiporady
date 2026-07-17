@@ -24,6 +24,7 @@ Available topic modules include:
 - `nfl` -> `app_nfl.py`
 - `honey_bees` -> `app_honey_bees.py`
 - `history` -> `app_history.py`
+- `jazz_msu` -> `app_jazz_msu.py`
 
 For the Brazilian international soccer game:
 
@@ -60,6 +61,8 @@ $env:JIPORADY_TOPIC = "brazil_soccer"
 python app_loader.py
 ```
 
+For the Utah Jazz and Michigan State game, use `JIPORADY_TOPIC=jazz_msu`.
+
 ## Deploy on Render
 1. Push these files to the repo.
 2. Create a new Web Service in Render from the GitHub repo.
@@ -80,6 +83,7 @@ python app_loader.py
 - `app_nfl.py` - NFL question bank and Flask routes
 - `app_honey_bees.py` - Honey Bees question bank and Flask routes
 - `app_history.py` - History question bank with an American Civil War Double Jiporady round
+- `app_jazz_msu.py` - Utah Jazz Round 1 and harder Michigan State Double Jiporady question bank
 - `app_*.py` - other topic-specific game modules
 - `templates/index.html` - main UI
 - `static/js/game.js` - gameplay logic and scorekeeping
