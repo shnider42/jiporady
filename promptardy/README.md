@@ -21,6 +21,7 @@ Available topic modules include:
 - `metal` -> `app_metal.py`
 - `music_theory` -> `app_music_theory.py`
 - `boston_sports` -> `app_boston_sports.py`
+- `red_sox_history` -> `app_red_sox_history.py`
 - `nfl` -> `app_nfl.py`
 - `honey_bees` -> `app_honey_bees.py`
 - `history` -> `app_history.py`
@@ -77,6 +78,7 @@ python app_loader.py
 - `app_metal.py` - Metal question bank and Flask routes
 - `app_music_theory.py` - Music theory question bank and Flask routes
 - `app_boston_sports.py` - Boston pro sports question bank and Flask routes
+- `app_red_sox_history.py` - Boston Red Sox history question bank and Flask routes
 - `app_nfl.py` - NFL question bank and Flask routes
 - `app_honey_bees.py` - Honey Bees question bank and Flask routes
 - `app_history.py` - History question bank with an American Civil War Double Jiporady round
