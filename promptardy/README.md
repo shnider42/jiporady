@@ -24,30 +24,31 @@ Available topic modules include:
 - `nfl` -> `app_nfl.py`
 - `honey_bees` -> `app_honey_bees.py`
 - `history` -> `app_history.py`
+- `cheesy_movies` -> `app_cheesy_movies.py`
 
-For the Brazilian international soccer game:
+For the cheesy movies game:
 
 ```bash
-JIPORADY_TOPIC=brazil_soccer python app_loader.py
+JIPORADY_TOPIC=cheesy_movies python app_loader.py
 ```
 
 On Windows PowerShell:
 
 ```powershell
-$env:JIPORADY_TOPIC = "brazil_soccer"
+$env:JIPORADY_TOPIC = "cheesy_movies"
 python app_loader.py
 ```
 
 You can also select the module explicitly:
 
 ```bash
-JIPORADY_APP_MODULE=app_brazil_soccer python app_loader.py
+JIPORADY_APP_MODULE=app_cheesy_movies python app_loader.py
 ```
 
 Or run the module directly:
 
 ```bash
-python app_brazil_soccer.py
+python app_cheesy_movies.py
 ```
 
 Then open `http://127.0.0.1:5000`.
@@ -56,21 +57,28 @@ If port 5000 is already busy, set a different port first:
 
 ```powershell
 $env:PORT = "5007"
-$env:JIPORADY_TOPIC = "brazil_soccer"
+$env:JIPORADY_TOPIC = "cheesy_movies"
 python app_loader.py
 ```
 
 ## Deploy on Render
-1. Push these files to the repo.
-2. Create a new Web Service in Render from the GitHub repo.
-3. Render should detect `render.yaml`, or you can use:
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `gunicorn app_loader:app`
-   - Environment variable: `JIPORADY_TOPIC=brazil_soccer`
-4. Deploy.
+
+The branch includes `render-cheesy-movies.yaml`, a dedicated Render Blueprint.
+
+Manual Render settings:
+
+- Branch: `agent/cheesy-movies-1977-1994`
+- Root Directory: `promptardy`
+- Build Command: `pip install -r requirements.txt`
+- Start Command: `gunicorn app_loader:app`
+- Health Check Path: `/health`
+- Environment variable: `JIPORADY_TOPIC=cheesy_movies`
+- Environment variable: `PYTHON_VERSION=3.11.9`
+- Environment variable: `SECRET_KEY=<generate a random secret>`
 
 ## Files
 - `app_loader.py` - topic-aware Flask entrypoint
+- `app_cheesy_movies.py` - cheesy action, sports, sci-fi, and cult movie game covering 1977-1994
 - `app_brazil_soccer.py` - Brazilian international soccer question bank and Flask routes
 - `app_nfl_since_2000.py` - NFL since 2000 question bank and Flask routes
 - `app_nba.py` - NBA question bank and Flask routes
@@ -84,6 +92,6 @@ python app_loader.py
 - `templates/index.html` - main UI
 - `static/js/game.js` - gameplay logic and scorekeeping
 - `static/css/styles.css` - styling
-- `render.yaml` - Render blueprint
-- `render-topic-example.yaml` - topic deployment example
+- `render.yaml` - default Render blueprint
+- `render-cheesy-movies.yaml` - dedicated cheesy movies Render blueprint
 - `Procfile` - fallback process declaration
