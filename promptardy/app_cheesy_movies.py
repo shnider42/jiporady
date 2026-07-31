@@ -89,13 +89,13 @@ GAME_DATA = {
                     ],
                 },
                 {
-                    "title": "Cannon Films University",
+                    "title": "Natty Trez",
                     "clues": [
-                        {"value": 200, "question": "This Israeli producing duo, cousins Menahem and Yoram, became synonymous with Cannon Films.", "answer": "Who are Menahem Golan and Yoram Globus?"},
-                        {"value": 400, "question": "Chuck Norris leads an American rescue mission in this 1984 Cannon action film.", "answer": "What is Missing in Action?"},
-                        {"value": 600, "question": "This 1985 Cannon sequel sends Charles Bronson's vigilante Paul Kersey back into action in New York.", "answer": "What is Death Wish 3?"},
-                        {"value": 800, "question": "In Masters of the Universe, Dolph Lundgren plays this sword-wielding hero from Eternia.", "answer": "Who is He-Man?"},
-                        {"value": 1000, "question": "This expensive 1987 Cannon production starring Christopher Reeve dramatized a famous American aviator and contributed to the studio's financial strain.", "answer": "What is The Aviator?"},
+                        {"value": 200, "question": "In the first film, the Ottendorf cipher on the Declaration can only be read using this set of Benjamin Franklin writings as its key text.", "answer": "What are the Silence Dogood letters?"},
+                        {"value": 400, "question": "The clue decoded from the Declaration points to the place where the shadow of this bell tower crosses the house of Pass and Stow.", "answer": "What is Independence Hall?"},
+                        {"value": 600, "question": "In Book of Secrets, the cipher hidden on the Booth diary page is solved with this keyword, taken from Thomas Gates's final message.", "answer": "What is DEATH?"},
+                        {"value": 800, "question": "The hidden mechanism in the Buckingham Palace Resolute desk is attributed to this fictional nineteenth-century puzzle-box maker.", "answer": "Who is Malcolm Gilvary?"},
+                        {"value": 1000, "question": "Ben's mother identifies the symbols on the paired wooden planks as belonging to this pre-Columbian language family, allowing the trail to Cibola to continue.", "answer": "What is Olmec?"},
                     ],
                 },
                 {
@@ -142,9 +142,9 @@ GAME_DATA = {
         },
     },
     "final": {
-        "category": "Final Jiporady: Maximum Commitment",
-        "question": "This 1989 film stars Jean-Claude Van Damme as a former soldier who enters a brutal kickboxing contest to avenge his paralyzed brother.",
-        "answer": "What is Kickboxer?",
+        "category": "Final Jiporady: Nicolas Cage",
+        "question": "Before playing Benjamin Franklin Gates, Nicolas Cage won the Academy Award for Best Actor for portraying suicidal screenwriter Ben Sanderson in this 1995 film.",
+        "answer": "What is Leaving Las Vegas?",
     },
 }
 
