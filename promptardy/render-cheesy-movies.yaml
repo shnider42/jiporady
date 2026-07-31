@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: jiporady-cheesy-movies
+    env: python
+    plan: free
+    rootDir: promptardy
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app_loader:app
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: JIPORADY_TOPIC
+        value: cheesy_movies
+      - key: SECRET_KEY
+        generateValue: true
