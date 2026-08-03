@@ -19,6 +19,7 @@ Available topic modules include:
 - `nfl_since_2000` -> `app_nfl_since_2000.py`
 - `nba` -> `app_nba.py`
 - `metal` -> `app_metal.py`
+- `heavy_metal_1970_1996` -> `app_heavy_metal_1970_1996.py`
 - `music_theory` -> `app_music_theory.py`
 - `boston_sports` -> `app_boston_sports.py`
 - `nfl` -> `app_nfl.py`
@@ -75,6 +76,7 @@ python app_loader.py
 - `app_nfl_since_2000.py` - NFL since 2000 question bank and Flask routes
 - `app_nba.py` - NBA question bank and Flask routes
 - `app_metal.py` - Metal question bank and Flask routes
+- `app_heavy_metal_1970_1996.py` - Heavy metal history from Black Sabbath's 1970 debut through the Gothenburg scene in 1996
 - `app_music_theory.py` - Music theory question bank and Flask routes
 - `app_boston_sports.py` - Boston pro sports question bank and Flask routes
 - `app_nfl.py` - NFL question bank and Flask routes
