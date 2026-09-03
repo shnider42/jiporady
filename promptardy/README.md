@@ -17,6 +17,7 @@ Available topic modules include:
 
 - `brazil_soccer` -> `app_brazil_soccer.py`
 - `nfl_since_2000` -> `app_nfl_since_2000.py`
+- `mlb_since_2000` -> `app_mlb_since_2000.py`
 - `nba` -> `app_nba.py`
 - `metal` -> `app_metal.py`
 - `music_theory` -> `app_music_theory.py`
@@ -60,6 +61,8 @@ $env:JIPORADY_TOPIC = "brazil_soccer"
 python app_loader.py
 ```
 
+For the MLB since 2000 game, use `JIPORADY_TOPIC=mlb_since_2000` or run `python app_mlb_since_2000.py` directly.
+
 ## Deploy on Render
 1. Push these files to the repo.
 2. Create a new Web Service in Render from the GitHub repo.
@@ -73,6 +76,7 @@ python app_loader.py
 - `app_loader.py` - topic-aware Flask entrypoint
 - `app_brazil_soccer.py` - Brazilian international soccer question bank and Flask routes
 - `app_nfl_since_2000.py` - NFL since 2000 question bank and Flask routes
+- `app_mlb_since_2000.py` - MLB since 2000 question bank with an AL East-focused first round and a harder modern-baseball second round
 - `app_nba.py` - NBA question bank and Flask routes
 - `app_metal.py` - Metal question bank and Flask routes
 - `app_music_theory.py` - Music theory question bank and Flask routes
