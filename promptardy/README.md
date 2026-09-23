@@ -87,3 +87,35 @@ python app_loader.py
 - `render.yaml` - Render blueprint
 - `render-topic-example.yaml` - topic deployment example
 - `Procfile` - fallback process declaration
+
+## General trivia with a little Spanish
+
+`general_spanish` -> `app_general_spanish.py`: 60 new clues across 12 categories,
+plus Final Jiporady. Eight Spanish clues are scattered across both rounds.
+Their answer reveals include an English translation; accept answers in either
+language. Round 1 is approachable, with a more challenging Double Jiporady.
+
+- Round 1: Passport, Please; Snack Attack; Animal House; Movie Night;
+  Everyday Science; Game Drawer.
+- Double Jiporady: Map Without Labels; Who Made That?; Turn It Up;
+  Time Machine; Between the Covers; Wait, Really?
+
+Run locally from `promptardy`:
+
+```bash
+JIPORADY_TOPIC=general_spanish python app_loader.py
+```
+
+Render settings for this version:
+
+- Branch: `feature/general-trivia-spanish` (until merged)
+- Root directory: `promptardy`
+- Build: `pip install -r requirements.txt`
+- Start: `gunicorn app_loader:app`
+- Health check: `/health`
+- Set `JIPORADY_TOPIC=general_spanish`.
+- Remove any old `JIPORADY_APP_MODULE` setting, or change it to
+  `app_general_spanish`: that variable overrides `JIPORADY_TOPIC`.
+
+When switching an existing deployment from another topic, click **New Game**
+to clear the shared browser score and used-clue progress.
